@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.63f89c54.css",
+    "main.js": "/static/js/main.12296389.js",
+    "static/js/453.ad6eb26e.chunk.js": "/static/js/453.ad6eb26e.chunk.js",
+    "static/media/png": "/static/media/9f790837a3c73a1f623cdf71751b00bb.88c105bf83d7094b6867.png",
+    "static/media/Egor.jpg": "/static/media/Egor.c544002506f62ddc12ce.jpg",
+    "static/media/1.jpeg": "/static/media/1.36d3b2421df63df3b8f9.jpeg",
+    "static/media/Rectangle 26.png": "/static/media/Rectangle 26.49052edf5c7dd4f6d9b1.png",
+    "static/media/Michael.jpg": "/static/media/Michael.c46c27edbe91a0d066a4.jpg",
+    "static/media/logo.svg": "/static/media/logo.b4362359c4a3de84363d.svg",
+    "static/media/3.jpg": "/static/media/3.f6286fe28cbe0a94769f.jpg",
+    "static/media/kvantorim-2048x772-transformed 1.png": "/static/media/kvantorim-2048x772-transformed 1.55045ec51a23b2a44f99.png",
+    "static/media/Model-Test.stl": "/static/media/Model-Test.4ce058a3acb31b638f8e.stl",
+    "index.html": "/index.html",
+    "static/media/drop-down.svg": "/static/media/drop-down.5d9c8495fb6b25f47f7e.svg",
+    "main.63f89c54.css.map": "/static/css/main.63f89c54.css.map",
+    "main.12296389.js.map": "/static/js/main.12296389.js.map",
+    "453.ad6eb26e.chunk.js.map": "/static/js/453.ad6eb26e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63f89c54.css",
+    "static/js/main.12296389.js"
+  ]
+}

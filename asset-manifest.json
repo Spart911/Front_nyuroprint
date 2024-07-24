@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.63f89c54.css",
-    "main.js": "/static/js/main.12296389.js",
+    "main.css": "/static/css/main.12ae2104.css",
+    "main.js": "/static/js/main.af35090d.js",
     "static/js/453.ad6eb26e.chunk.js": "/static/js/453.ad6eb26e.chunk.js",
     "static/media/png": "/static/media/9f790837a3c73a1f623cdf71751b00bb.88c105bf83d7094b6867.png",
     "static/media/Egor.jpg": "/static/media/Egor.c544002506f62ddc12ce.jpg",
@@ -12,14 +12,18 @@
     "static/media/3.jpg": "/static/media/3.f6286fe28cbe0a94769f.jpg",
     "static/media/kvantorim-2048x772-transformed 1.png": "/static/media/kvantorim-2048x772-transformed 1.55045ec51a23b2a44f99.png",
     "static/media/Model-Test.stl": "/static/media/Model-Test.4ce058a3acb31b638f8e.stl",
+    "static/media/manager-logo.svg": "/static/media/manager-logo.aa2f8f61ed491509c8db429242c27113.svg",
+    "static/media/send_logo.svg": "/static/media/send_logo.514ecf268182d57bd256173628b064bd.svg",
+    "static/media/person-logo.svg": "/static/media/person-logo.19a7c9e8bc0be2389967e069013d9efc.svg",
+    "static/media/message-logo.svg": "/static/media/message-logo.5371b3ba53b16181cd1485b0df3ba310.svg",
     "index.html": "/index.html",
     "static/media/drop-down.svg": "/static/media/drop-down.5d9c8495fb6b25f47f7e.svg",
-    "main.63f89c54.css.map": "/static/css/main.63f89c54.css.map",
-    "main.12296389.js.map": "/static/js/main.12296389.js.map",
+    "main.12ae2104.css.map": "/static/css/main.12ae2104.css.map",
+    "main.af35090d.js.map": "/static/js/main.af35090d.js.map",
     "453.ad6eb26e.chunk.js.map": "/static/js/453.ad6eb26e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63f89c54.css",
-    "static/js/main.12296389.js"
+    "static/css/main.12ae2104.css",
+    "static/js/main.af35090d.js"
   ]
 }

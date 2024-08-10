@@ -1,0 +1,45 @@
+.agreement {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+
+.agreement-content{
+    padding: 50px 0;
+}
+
+.agreement-content h1{
+    font-size: 36px;
+    text-align: left;
+    margin: 0;
+}
+
+.agreement-content p {
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+
+@media (max-width: 600px) { 
+    .agreement-content h1{
+        font-size: 16px;
+    }
+    .agreement-content p {
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .agreement-content h1{
+        font-size: 24px;
+    }
+    .agreement-content p {
+        font-size: 24px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1536px) {
+    .agreement-content p {
+        font-size: 30px;
+    }
+  }

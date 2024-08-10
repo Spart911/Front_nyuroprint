@@ -1,0 +1,55 @@
+.help {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.help-content{
+    padding: 50px 0;
+    height: 100vh;
+}
+
+.help-content h1{
+    font-size: 36px;
+    text-align: left;
+    margin: 0;
+}
+
+.help-content p {
+    font-size: 24px;
+    margin-top: 30px;
+}
+
+.help-content span {
+    color: #73C66D;
+}
+
+@media (max-width: 600px) { 
+    .help-content h1{
+        font-size: 16px;
+    }
+    .help-content p {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .help-content h1{
+        font-size: 24px;
+    }
+    .help-content p {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1536px) {
+    .help-content p {
+        font-size: 22px;
+    }
+  }

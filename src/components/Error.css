@@ -1,0 +1,24 @@
+.error-content {
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+}
+
+.error-content h1 {
+    display: flex;
+    font-size: 68px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #61875E;
+    margin-bottom: 0;
+}
+
+.error-content p {
+    display: flex;
+    font-size: 48px;
+    color: #61875E;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+}

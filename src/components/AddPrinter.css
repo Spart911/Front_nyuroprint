@@ -1,0 +1,168 @@
+.container3 {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  padding: 20px;
+}
+
+.block {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.block1 {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+
+
+.setting label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.setting {
+  margin-bottom: 15px;
+  position: relative; /* Для позиционирования текста "мм" */
+}
+
+.setting input[type="number"], 
+.setting textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Учитывает padding и border в общей ширине элемента */
+}
+
+.setting .unit {
+  position: absolute;
+  top: 68%;
+  right: 40px;
+  color: #4CAF50;
+  font-family: 'Inter', sans-serif;
+  transform: translateY(-50%);
+}
+
+.button, .activeButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 4px;
+  border: none; /* Убирает рамку вокруг кнопки */
+  transition: none; /* Отключает все анимации */
+}
+
+.button:focus, .activeButton:focus {
+  outline: none; /* Убирает обводку при фокусе */
+}
+
+.button:hover, .activeButton:hover {
+  background-color: #4CAF50; /* Сохраняет цвет фона при наведении */
+  color: white; /* Сохраняет цвет текста при наведении */
+  padding: 10px 20px; /* Сохраняет размер padding при наведении */
+  margin: 4px 2px; /* Сохраняет размер margin при наведении */
+  border-radius: 4px; /* Сохраняет радиус скругления */
+  border: none; /* Сохраняет отсутствие рамки */
+}
+
+.activeButton {
+  background-color: #45a049;
+}
+
+button:hover {
+  background-color: #EBF0EB;
+  border: 1px solid #61875E;
+}
+
+.saveButton {
+  color: white;
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  width: 160px; /* Явно заданный размер */
+  height: 40px; /* Явно заданный размер */
+}
+
+.saveButton:hover {
+  background-color: #45a049;
+}
+
+.saveButton:hover {
+  background-color: #45a049;
+}
+
+.checkboxSetting label {
+  display: inline-block;
+  margin-right: 10px;
+  color: #333;
+}
+
+.inputField {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #4CAF50; /* Цвет рамки при фокусе */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Тень при фокусе */
+}
+.selectField option {
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
+.selectField {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+.selectField:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.selectField option {
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.checkboxSetting {
+  margin-bottom: 10px;
+}
+
+.checkboxSetting label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+}
+
+.checkboxSetting input[type="checkbox"] {
+  margin-right: 10px; /* Расстояние между чекбоксом и текстом */
+}

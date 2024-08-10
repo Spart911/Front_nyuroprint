@@ -1,0 +1,86 @@
+.defect-content {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 80px);
+}
+
+.defect-title {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.extrusion-text {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.defect-button {
+    background-color: #EBF0EB;
+    color: #61875E;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 20px 25px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    width: 590px;
+    margin-top: 20px;
+}
+
+.icon-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.ic {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.fas {
+    margin-right: 10px;
+    /* background-color: #D9D9D9; */
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.icon-text-top, 
+.icon-text-bottom {
+    display: block;
+}
+
+.icon-text-bottom {
+    color:#61875E;
+    font-size: 12px;
+}
+
+@media (max-width: 600px) { 
+    .defect-title {
+        font-size: 36px;
+    }
+
+    .extrusion-text {
+        font-size: 18px;
+    }
+
+    .defect-button {
+        font-size: 18px;
+        width: 350px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .defect-button {
+        font-size: 18px;
+        width: 390px;
+    }
+}

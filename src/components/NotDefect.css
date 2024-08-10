@@ -1,0 +1,66 @@
+.not-defect-content {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+.hh1 {
+    font-size: 48px;
+    color: black;
+    text-align: center;
+}
+
+.not-defect-button {
+    background-color: #EBF0EB;
+    color: #61875E;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 20px 25px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    width: 490px;
+    margin-top: 20px;
+}
+
+.content2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 600px) { 
+    .hh1 {
+        font-size: 20px;
+    }
+    .not-defect-button {
+        font-size: 16px;
+        width: 290px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .hh1 {
+        font-size: 24px;
+    }
+    .not-defect-button {
+        font-size: 16px;
+        width: 390px;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1536px) {
+    .hh1 {
+        font-size: 36px;
+    }
+    .not-defect-button {
+        font-size: 24px;
+        width: 490px;
+    }
+}

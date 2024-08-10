@@ -1,0 +1,77 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #61875E;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+  }
+
+  .logo-link {
+    text-decoration: none;
+    display: flex;
+    color: black;
+    align-items: center;
+  }
+  
+  @media (max-width: 1536px) {
+    .logo-container {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  @media (min-width: 319px) and (max-width: 600px){
+    .logo-container {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+    background-image: url('../logo.svg'); /* Указываем путь к логотипу */
+    background-size: cover; /* Растягиваем изображение на всю площадь */
+    background-position: center; /* Центрируем изображение */
+    margin-right: 10px;
+}
+  .navigation .nav-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    justify-content: space-between;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #EBF0EB;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .navigation .nav-button .nav-button-2:hover {
+    background-color: #ddd; 
+  }
+
+  .navigation .nav-button-2 {
+    padding: 10px 20px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #73C66D;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+  }

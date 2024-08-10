@@ -19,6 +19,7 @@
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-scrollspy": "^3.4.3",
+    "socket.io-client": "^4.7.5",
     "tdl": "^8.0.1",
     "tdweb": "^1.8.0",
     "telegram-mtproto": "^1.0.5",

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import io from 'socket.io-client';
 import Header from './Header';
 import './Started.css';
 import './Feedback.css';
 import SupportChat from './SupportChat';
 import AddPrinter from './AddPrinter';
-import axios from 'axios';
 import Mod from "../img/Model-Test.stl";
 import Cookies from 'js-cookie';
 
 const Started = () => {
+  const [socket, setSocket] = useState(null);
   const [printers, setPrinters] = useState([]);
   const [selectedPrinter, setSelectedPrinter] = useState('');
   const [selectedQuality, setSelectedQuality] = useState('');
@@ -18,6 +19,36 @@ const Started = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    const newSocket = io('http://83.221.210.29:5000');
+    setSocket(newSocket);
+
+    newSocket.on('connect', () => {
+      console.log('Connected to server');
+      newSocket.emit('get_printers');
+    });
+
+    newSocket.on('printers', (receivedPrinters) => {
+      setPrinters(receivedPrinters);
+    });
+
+    newSocket.on('printer_added', (result) => {
+      console.log('Printer added:', result);
+      newSocket.emit('get_printers');
+    });
+
+    newSocket.on('print_added', (result) => {
+      console.log('Print added:', result);
+      if (result.defect === 1) {
+        window.location.href = '/defect';
+      } else if (result.defect === 0) {
+        window.location.href = '/not-defect';
+      }
+    });
+
+    return () => newSocket.close();
+  }, []);
 
   useEffect(() => {
     const consent = Cookies.get('userConsent');
@@ -72,45 +103,6 @@ const Started = () => {
     setSelectedFile(null);
   };
 
-  const fetchPrinters = useCallback(async () => {
-    try {
-      let ids_printers = getIdsFromCookie();
-      let AllPrinterData = [];
-      
-      // Получаем данные для принтеров с ID от 1 до 17
-      for (let i = 1; i < 18; i++) {
-        try {
-          let response = await axios.get(`http://83.221.210.29:300/api/printers/${i}`);
-          AllPrinterData.push(response.data.data);
-        } catch (error) {
-          console.error(`Ошибка при получении данных для принтера с ID ${i}:`, error);
-        }
-      }
-  
-      // Получаем данные для принтеров из куки
-      if (ids_printers.length !== 0) {
-        for (let id of ids_printers) {
-          try {
-            let response = await axios.get(`http://83.221.210.29:300/api/printers/${id}`);
-            AllPrinterData.push(response.data.data);
-          } catch (error) {
-            console.error(`Ошибка при получении данных для принтера с ID ${id}:`, error);
-          }
-        }
-      }
-  
-      // Устанавливаем данные принтеров
-      setPrinters(AllPrinterData);
-    } catch (error) {
-      console.error('Ошибка при получении списка принтеров:', error);
-    }
-  }, []);
-      
-
-  useEffect(() => {
-    fetchPrinters();
-  }, [fetchPrinters]);
-
   const handlePrinterSelect = (e) => {
     const printerId = e.target.value;
     setSelectedPrinter(printerId);
@@ -129,8 +121,7 @@ const Started = () => {
   };
 
   const handleAddPrinter = (newPrinter) => {
-    fetchPrinters();
-    setSelectedPrinter(newPrinter);
+    socket.emit('add_printer', newPrinter);
     handleCloseModal();
   };
 
@@ -145,38 +136,15 @@ const Started = () => {
 
   const handleSubmit = async (file) => {
     setLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append('printer_id', selectedPrinter);
-      formData.append('quality', selectedQuality);
-      if (file) {
-        formData.append('img', file);
-      }
-
-      const response = await axios.post('http://83.221.210.29:300/api/prints/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      console.log('Ответ от сервера:', response.data);
-
-      if (response.data.defect === 1) {
-        window.location.href = '/defect';
-      } else if (response.data.defect === 0) {
-        window.location.href = '/not-defect';
-      }
-    } catch (error) {
-      if (error.response) {
-        console.error('Ошибка ответа от сервера:', error.response.data);
-      } else if (error.request) {
-        console.error('Ошибка запроса:', error.request);
-      } else {
-        console.error('Общая ошибка:', error.message);
-      }
-    } finally {
-      setLoading(false);
+    const formData = new FormData();
+    formData.append('printer_id', selectedPrinter);
+    formData.append('quality', selectedQuality);
+    if (file) {
+      formData.append('img', file);
     }
+
+    socket.emit('add_print', formData);
+    setLoading(false);
   };
 
   return (

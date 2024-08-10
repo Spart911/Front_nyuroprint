@@ -80,7 +80,7 @@ const Started = () => {
       // Получаем данные для принтеров с ID от 1 до 17
       for (let i = 1; i < 18; i++) {
         try {
-          let response = await axios.get(`http://83.221.210.29:300/api/printers/${i}`);
+          let response = await axios.get(`https://83.221.210.29:443/api/printers/${i}`);
           AllPrinterData.push(response.data.data);
         } catch (error) {
           console.error(`Ошибка при получении данных для принтера с ID ${i}:`, error);
@@ -91,7 +91,7 @@ const Started = () => {
       if (ids_printers.length !== 0) {
         for (let id of ids_printers) {
           try {
-            let response = await axios.get(`http://83.221.210.29:300/api/printers/${id}`);
+            let response = await axios.get(`https://83.221.210.29:443/api/printers/${id}`);
             AllPrinterData.push(response.data.data);
           } catch (error) {
             console.error(`Ошибка при получении данных для принтера с ID ${id}:`, error);
@@ -153,7 +153,7 @@ const Started = () => {
         formData.append('img', file);
       }
 
-      const response = await axios.post('http://83.221.210.29:300/api/prints/', formData, {
+      const response = await axios.post('https://83.221.210.29:443/api/prints/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

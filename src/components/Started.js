@@ -76,7 +76,7 @@ const Started = () => {
     try {
       let ids_printers = getIdsFromCookie();
       let AllPrinterData = [];
-      
+
       // Получаем данные для принтеров с ID от 1 до 17
       for (let i = 1; i < 18; i++) {
         try {
@@ -86,7 +86,7 @@ const Started = () => {
           console.error(`Ошибка при получении данных для принтера с ID ${i}:`, error);
         }
       }
-  
+
       // Получаем данные для принтеров из куки
       if (ids_printers.length !== 0) {
         for (let id of ids_printers) {
@@ -98,14 +98,14 @@ const Started = () => {
           }
         }
       }
-  
+
       // Устанавливаем данные принтеров
       setPrinters(AllPrinterData);
     } catch (error) {
       console.error('Ошибка при получении списка принтеров:', error);
     }
   }, []);
-      
+
 
   useEffect(() => {
     fetchPrinters();
@@ -153,7 +153,7 @@ const Started = () => {
         formData.append('img', file);
       }
 
-      const response = await axios.post('https:/nyuroprintapi.ru:5000/api/prints/', formData, {
+      const response = await axios.post('https://nyuroprintapi.ru:5000/api/prints/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

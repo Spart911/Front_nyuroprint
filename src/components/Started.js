@@ -7,6 +7,7 @@ import AddPrinter from './AddPrinter';
 import axios from 'axios';
 import Mod from "../img/Model-Test.stl";
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router';
 
 const Started = () => {
   const [printers, setPrinters] = useState([]);
@@ -18,6 +19,7 @@ const Started = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const consent = Cookies.get('userConsent');
@@ -157,14 +159,22 @@ const Started = () => {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
+      }).catch(error => {
+        if (error.response) {
+          console.error('Ошибка ответа от сервера:', error.response.data);
+        } else if (error.request) {
+          console.error('Ошибка запроса:', error.request);
+        } else {
+          console.error('Общая ошибка:', error.message);
+        }
       });
 
       console.log('Ответ от сервера:', response.data);
 
       if (response.data.defect === 1) {
-        window.location.href = '/defect';
+        navigate('/defect')
       } else if (response.data.defect === 0) {
-        window.location.href = '/not-defect';
+        navigate('/not-defect')
       }
     } catch (error) {
       if (error.response) {

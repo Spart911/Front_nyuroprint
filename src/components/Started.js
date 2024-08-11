@@ -79,22 +79,23 @@ const Started = () => {
       let ids_printers = getIdsFromCookie();
       let AllPrinterData = [];
 
-      // Получаем данные для принтеров с ID от 1 до 17
-       const requests = [];
+    // Получаем данные для принтеров с ID от 1 до 17
+    const printerIds = Array.from({ length: 17 }, (_, i) => i + 1);
 
-      // Создаем массив промисов для всех запросов
-      for (let i = 1; i < 18; i++) {
-        requests.push(
-          axios.get(`https://nyuroprintapi.ru:5000/api/printers/${i}`)
-            .then(response => allPrinterData.push(response.data.data))
-            .catch(error => console.error(`Ошибка при получении данных для принтера с ID ${i}:`, error))
-        );
-      }
+    const printerRequests = printerIds.map(i => 
+      axios.get(`https://nyuroprintapi.ru:5000/api/printers/${i}`)
+        .then(response => response.data.data)
+        .catch(error => {
+          console.error(`Ошибка при получении данных для принтера с ID ${i}:`, error);
+          return null;
+        })
+    );
 
-      // Ожидаем завершения всех промисов
-      await Promise.all(requests);
-
-      return allPrinterData;
+    try {
+      const results = await Promise.all(printerRequests);
+      AllPrinterData = results.filter(data => data !== null);
+    } catch (error) {
+      console.error('Произошла ошибка при выполнении запросов:', error);
     }
 
       // Получаем данные для принтеров из куки

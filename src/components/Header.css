@@ -47,31 +47,74 @@
     background-position: center; /* Центрируем изображение */
     margin-right: 10px;
 }
-  .navigation .nav-button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    justify-content: space-between;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    background-color: #EBF0EB;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
+ /* Основной стиль для навигационного контейнера */
+.navigation {
+  display: flex;
+  justify-content: space-between; /* Размещает кнопки по краям контейнера */
+  padding: 10px; /* Отступы вокруг контейнера */
+}
+
+/* Основной стиль для кнопок */
+.navigation .nav-button,
+.navigation .nav-button-2 {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Добавляем расстояние между кнопками на ПК */
+.navigation .nav-button {
+  background-color: #EBF0EB;
+  margin-right: 5px; /* Расстояние между кнопками */
+}
+
+.navigation .nav-button-2 {
+  background-color: #73C66D;
+  margin-left: 5px; /* Расстояние между кнопками */
+}
+
+/* Стили при наведении */
+.navigation .nav-button:hover,
+.navigation .nav-button-2:hover {
+  background-color: #ddd; /* Или другой цвет при наведении */
+}
+
+/* Стили для кнопок на мобильных экранах */
+@media (max-width: 767px) {
+  .navigation {
+    justify-content: center; /* Центрирует кнопки по горизонтали на мобильных устройствах */
   }
-  
-  .navigation .nav-button .nav-button-2:hover {
-    background-color: #ddd; 
+
+  .navigation .nav-button,
+  .navigation .nav-button-2 {
+    padding: 5px;
+    margin: 0 5px; /* Уменьшение отступов между кнопками */
+    border-radius: 50%; /* Круглая форма */
+    width: 40px; /* Ширина кнопки */
+    height: 40px; /* Высота кнопки */
+    font-size: 0; /* Скрытие текста */
+    background-size: 35px; /* Размер иконки */
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .navigation .nav-button {
+    background-image: url('../img/about_us.svg'); /* Путь к первой иконке */
   }
 
   .navigation .nav-button-2 {
-    padding: 10px 20px;
-    margin-left: 20px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    background-color: #73C66D;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
+    background-image: url('../img/start.svg'); /* Путь ко второй иконке */
   }
+
+  /* Скрываем текст */
+  .navigation .button-text {
+    display: none; /* Убираем текст */
+  }
+}

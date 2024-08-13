@@ -69,6 +69,11 @@
   justify-content: center;
 }
 
+/* Убираем подчеркивание текста в ссылках */
+.navigation a {
+  text-decoration: none; /* Убираем подчеркивание */
+}
+
 /* Добавляем расстояние между кнопками на ПК */
 .navigation .nav-button {
   background-color: #EBF0EB;

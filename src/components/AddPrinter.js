@@ -64,7 +64,7 @@ const AddPrinter = ({ onSave }) => {
         break;
     }
     try {
-      const response = await axios.post('http://localhost:5000/api/printers/', dataToSave, {
+      const response = await axios.post('https://nyuroprintapi.ru:5000/api/printers/', dataToSave, {
         headers: {
           'Content-Type': 'application/json'
         }

@@ -285,8 +285,7 @@
       font-size: 12px;
     }
     .card img {
-      width: 45%;
-      height: 350px;
+      display: none;
     }
     .frame{
       width: 300px;

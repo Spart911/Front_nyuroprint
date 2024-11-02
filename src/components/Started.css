@@ -85,7 +85,7 @@
   }
 
   .quality-block.active, .quality-block:hover {
-    background-color: #EBF0EB;
+    background-color: #61875E;
     border-left: 4px solid #61875E;
     width: calc(100% - 20px);
   }
@@ -110,10 +110,8 @@
     flex-direction: column;
     /* border: 0.5px solid #46623b; */
   }
-  
-  .quality-block.active {
-    background-color: #61875E;
-  } 
+
+
 
   .upload-block {
     display: flex;

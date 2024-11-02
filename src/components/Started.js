@@ -41,6 +41,12 @@ const Started = () => {
       { id: 16, name: "ZAV-PRO V3" },
       { id: 17, name: "Biqu Hurakan" }
     ];
+
+    const qualityOptions = {
+      "Стандартный (Высота слоя 0,2 мм)": 1,
+      "Высокий (Высота слоя 0,1 мм)": 2,
+      "Ультра (Высота слоя 0,05 мм)": 3,
+  };
   
   useEffect(() => {
     const consent = Cookies.get('userConsent');
@@ -55,24 +61,10 @@ const Started = () => {
   }
 
   const handleQualitySelect = (quality) => {
-    let qualityValue;
-    switch (quality) {
-      case 'Стандартный (Высота слоя 0,2 мм)':
-        qualityValue = 1;
-        break;
-      case 'Высокий (Высота слоя 0,1 мм)':
-        qualityValue = 2;
-        break;
-      case 'Ультра (Высота слоя 0,05 мм)':
-        qualityValue = 3;
-        break;
-      default:
-        qualityValue = '';
-    }
-    setSelectedQuality(qualityValue);
+    const qualityValue = qualityOptions[quality]; // Получаем числовое значение из объекта
+    setSelectedQuality(quality); // Сохраняем текстовое значение качества
     console.log('Выбранный элемент:', qualityValue);
-  };
-
+};
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && (file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/jpg")) {
@@ -156,7 +148,7 @@ const Started = () => {
     try {
       const formData = new FormData();
       formData.append('printer_id', selectedPrinter);
-      formData.append('quality', selectedQuality);
+      formData.append('quality', qualityOptions[selectedQuality]);
       if (file) {
         formData.append('img', file);
       }
@@ -216,16 +208,21 @@ const Started = () => {
                 </select>
               </div>
               <div className="quality-selection">
-                {['Стандартный (Высота слоя 0,2 мм)', 'Высокий (Высота слоя 0,1 мм)', 'Ультра (Высота слоя 0,05 мм)'].map((quality) => (
-                  <div
-                    key={quality}
-                    className={`quality-block ${selectedQuality === quality ? 'active' : ''}`}
-                    onClick={() => handleQualitySelect(quality)}>
-                    <h3>{quality}</h3>
-                    <p>{quality === 'Стандартный (Высота слоя 0,2 мм)' ? 'Баланс между скоростью и качеством' : quality === 'Высокий (Высота слоя 0,1 мм)' ? 'Более мелкие детали и более длительное время печати' : 'Высочайшее качество и значительно более длительное время'}</p>
-                  </div>
+                {Object.keys(qualityOptions).map((quality) => (
+                    <div
+                        key={quality}
+                        className={`quality-block ${selectedQuality === quality ? 'active' : ''}`} // Проверка для активного класса
+                        onClick={() => handleQualitySelect(quality)}>
+                        <h3>{quality}</h3>
+                        <p>
+                            {quality === 'Стандартный (Высота слоя 0,2 мм)' 
+                                ? 'Баланс между скоростью и качеством' 
+                                : quality === 'Высокий (Высота слоя 0,1 мм)' 
+                                ? 'Более мелкие детали и более длительное время печати' 
+                                : 'Высочайшее качество и значительно более длительное время'}
+                        </p>
+                    </div>
                 ))}
-              </div>
             </div>
             <div className="upload-block">
               <div className="upload-photo">

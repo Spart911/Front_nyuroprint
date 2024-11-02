@@ -85,7 +85,7 @@
   }
 
   .quality-block.active, .quality-block:hover {
-    background-color: #61875E;
+    background-color: #EBF0EB;
     border-left: 4px solid #61875E;
     width: calc(100% - 20px);
   }

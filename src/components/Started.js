@@ -55,6 +55,7 @@ const Started = () => {
   }
 
   const handleQualitySelect = (quality) => {
+    setSelectedQuality(quality);
     let qualityValue;
     switch (quality) {
       case 'Стандартный (Высота слоя 0,2 мм)':
@@ -216,16 +217,21 @@ const Started = () => {
                 </select>
               </div>
               <div className="quality-selection">
-                {['Стандартный (Высота слоя 0,2 мм)', 'Высокий (Высота слоя 0,1 мм)', 'Ультра (Высота слоя 0,05 мм)'].map((quality) => (
-                  <div
-                    key={quality}
-                    className={`quality-block ${selectedQuality === quality ? 'active' : ''}`}
-                    onClick={() => handleQualitySelect(quality)}>
-                    <h3>{quality}</h3>
-                    <p>{quality === 'Стандартный (Высота слоя 0,2 мм)' ? 'Баланс между скоростью и качеством' : quality === 'Высокий (Высота слоя 0,1 мм)' ? 'Более мелкие детали и более длительное время печати' : 'Высочайшее качество и значительно более длительное время'}</p>
-                  </div>
-                ))}
-              </div>
+              {['Стандартный (Высота слоя 0,2 мм)', 'Высокий (Высота слоя 0,1 мм)', 'Ультра (Высота слоя 0,05 мм)'].map((quality) => (
+                <div
+                  key={quality}
+                  className={`quality-block ${selectedQuality === quality ? 'active' : ''}`}
+                  onClick={() => handleQualitySelect(quality)}>
+                  <h3>{quality}</h3>
+                  <p>
+                    {quality === 'Стандартный (Высота слоя 0,2 мм)' 
+                      ? 'Баланс между скоростью и качеством' 
+                      : quality === 'Высокий (Высота слоя 0,1 мм)' 
+                        ? 'Более мелкие детали и более длительное время печати' 
+                        : 'Высочайшее качество и значительно более длительное время'}
+                  </p>
+                </div>
+              ))}
             </div>
             <div className="upload-block">
               <div className="upload-photo">

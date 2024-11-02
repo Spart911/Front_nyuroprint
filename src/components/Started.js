@@ -146,6 +146,21 @@ const Started = () => {
   const handleSubmit = async (file) => {
     setLoading(true);
     try {
+      // Проверяем, выбраны ли принтер, файл и качество
+      if (!selectedPrinter) {
+        alert('Пожалуйста, выберите принтер.');
+        return; // Выход из функции, если принтер не выбран
+        }
+
+        if (!file) {
+            alert('Пожалуйста, выберите изображение.');
+            return; // Выход из функции, если файл не выбран
+        }
+
+        if (!qualityOptions[selectedQuality]) {
+            alert('Пожалуйста, выберите качество.');
+            return; // Выход из функции, если качество не выбрано
+        }
       const formData = new FormData();
       formData.append('printer_id', selectedPrinter);
       formData.append('quality', qualityOptions[selectedQuality]);

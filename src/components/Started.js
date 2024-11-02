@@ -21,6 +21,27 @@ const Started = () => {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
+    // Список первых 17 принтеров, хранящийся на фронте
+    const defaultPrinters = [
+      { id: 1, name: "Ender 3" },
+      { id: 2, name: "Creality Ender 5" },
+      { id: 3, name: "Anycubic i3 Mega" },
+      { id: 4, name: "Ultimaker S3" },
+      { id: 5, name: "Prusa SL1S" },
+      { id: 6, name: "Raise3D E2" },
+      { id: 7, name: "MakerBot Replicator Z18" },
+      { id: 8, name: "Wanhao Duplicator 9" },
+      { id: 9, name: "Prusa MINI+" },
+      { id: 10, name: "UlTi Steel 2" },
+      { id: 11, name: "FlyingBear Ghost 5" },
+      { id: 12, name: "Creality CR-K1C" },
+      { id: 13, name: "Anycubic Kobra 2 Neo" },
+      { id: 14, name: "Creality K1" },
+      { id: 15, name: "FlyingBear Ghost 6" },
+      { id: 16, name: "ZAV-PRO V3" },
+      { id: 17, name: "Biqu Hurakan" }
+    ];
+  
   useEffect(() => {
     const consent = Cookies.get('userConsent');
     if (consent) {
@@ -74,49 +95,25 @@ const Started = () => {
     setSelectedFile(null);
   };
 
+  // Функция для получения данных о принтерах из куков и добавления к первым 17 принтерам
   const fetchPrinters = useCallback(async () => {
-    try {
-      let ids_printers = getIdsFromCookie();
-      let AllPrinterData = [];
+    let AllPrinterData = [...defaultPrinters]; // Используем статический список для первых 17 принтеров
+    let ids_printers = getIdsFromCookie();
 
-    // Получаем данные для принтеров с ID от 1 до 17
-    const printerIds = Array.from({ length: 17 }, (_, i) => i + 1);
-
-    const printerRequests = printerIds.map(i => 
-      axios.get(`https://nyuroprintapi.ru:5000/api/printers/${i}`)
-        .then(response => response.data.data)
-        .catch(error => {
-          console.error(`Ошибка при получении данных для принтера с ID ${i}:`, error);
-          return null;
-        })
-    );
-
-    try {
-      const results = await Promise.all(printerRequests);
-      AllPrinterData = results.filter(data => data !== null);
-    } catch (error) {
-      console.error('Произошла ошибка при выполнении запросов:', error);
-    }
-
-      // Получаем данные для принтеров из куки
-      if (ids_printers.length !== 0) {
-        for (let id of ids_printers) {
-          try {
-            let response = await axios.get(`https://nyuroprintapi.ru:5000/api/printers/${id}`);
-            AllPrinterData.push(response.data.data);
-          } catch (error) {
-            console.error(`Ошибка при получении данных для принтера с ID ${id}:`, error);
-          }
+    // Получаем данные для принтеров из куки
+    if (ids_printers.length !== 0) {
+      for (let id of ids_printers) {
+        try {
+          let response = await axios.get(`https://nyuroprintapi.ru:5000/api/printers/${id}`);
+          AllPrinterData.push(response.data.data);
+        } catch (error) {
+          console.error(`Ошибка при получении данных для принтера с ID ${id}:`, error);
         }
       }
-
-      // Устанавливаем данные принтеров
-      setPrinters(AllPrinterData);
-    } catch (error) {
-      console.error('Ошибка при получении списка принтеров:', error);
     }
-  }, []);
 
+    setPrinters(AllPrinterData);
+  }, []);
 
   useEffect(() => {
     fetchPrinters();

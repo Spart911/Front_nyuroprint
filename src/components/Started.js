@@ -23,6 +23,7 @@ const Started = () => {
 
     // Список первых 17 принтеров, хранящийся на фронте
     const defaultPrinters = [
+      { id: 0, name: "NONE CHOICE" },
       { id: 1, name: "Ender 3" },
       { id: 2, name: "Creality Ender 5" },
       { id: 3, name: "Anycubic i3 Mega" },
@@ -147,7 +148,7 @@ const Started = () => {
     setLoading(true);
     try {
       // Проверяем, выбраны ли принтер, файл и качество
-      if (!selectedPrinter) {
+      if (!selectedPrinter || selectedPrinter === '0') {
         alert('Пожалуйста, выберите принтер.');
         return; // Выход из функции, если принтер не выбран
         }

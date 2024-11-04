@@ -215,6 +215,7 @@ const Started = () => {
           <div className="blockk">
             <div className="selection-block">
               <div className="printer-selection">
+                <p></p>
                 <select onChange={handlePrinterSelect} value={selectedPrinter}>
                   {printers.map((printer) => (
                     <option key={printer.id} value={printer.id}>{printer.name}</option>

@@ -23,7 +23,7 @@ const Started = () => {
 
     // Список первых 17 принтеров, хранящийся на фронте
     const defaultPrinters = [
-      { id: 0, name: "NONE CHOICE" },
+      { id: 0, name: "Выберите принтер" },
       { id: 1, name: "Ender 3" },
       { id: 2, name: "Creality Ender 5" },
       { id: 3, name: "Anycubic i3 Mega" },

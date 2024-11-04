@@ -62,7 +62,7 @@
     content: '';
     position: absolute;
     right: 15px; /* Расположение иконки правее */
-    top: 77%;
+    top: 63%;
     transform: translateY(-50%);
     width: 40px; /* Ширина иконки */
     height: 40px; /* Высота иконки */

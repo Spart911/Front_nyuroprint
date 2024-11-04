@@ -23,7 +23,7 @@ const Started = () => {
 
     // Список первых 17 принтеров, хранящийся на фронте
     const defaultPrinters = [
-      { id: 0, name: "Выберите принтер" },
+      { id: 0, name: "Выберите свой принтер" },
       { id: 1, name: "Ender 3" },
       { id: 2, name: "Creality Ender 5" },
       { id: 3, name: "Anycubic i3 Mega" },
@@ -215,7 +215,6 @@ const Started = () => {
           <div className="blockk">
             <div className="selection-block">
               <div className="printer-selection">
-                <p>Выберите свой принтер</p>
                 <select onChange={handlePrinterSelect} value={selectedPrinter}>
                   {printers.map((printer) => (
                     <option key={printer.id} value={printer.id}>{printer.name}</option>

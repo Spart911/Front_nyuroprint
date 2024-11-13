@@ -15,7 +15,7 @@ const SupportChat = () => {
   const processedMessagesRef = useRef(new Set()); // Множество для уникальности сообщений
   const [hasFetchedHistory, setHasFetchedHistory] = useState(false); // Состояние для проверки, был ли выполнен запрос
 
-  const API_URL = 'https://nyuroprintapi.ru:8765/api/chat-history'; // URL для получения истории чата
+  const API_URL = 'https://nyuroprintapi.ru:443/api/chat-history'; // URL для получения истории чата
 
   // Устанавливаем userId и загружаем сообщения при монтировании компонента
   useEffect(() => {
@@ -70,7 +70,7 @@ const SupportChat = () => {
         return;
       }
 
-      const BACKEND_URL = `wss://nyuroprintapi.ru:8765/ws/${userId}`; // Подключение с client_id (userId)
+      const BACKEND_URL = `wss://nyuroprintapi.ru:443/ws/${userId}`; // Подключение с client_id (userId)
 
       socketRef.current = new WebSocket(BACKEND_URL);
 

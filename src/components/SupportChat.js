@@ -70,7 +70,7 @@ const SupportChat = () => {
         return;
       }
 
-      const BACKEND_URL = `wss://nyuroprintapi.ru:8765/ws/${userId}`; // Подключение с client_id (userId)
+      const BACKEND_URL = `ws://nyuroprintapi.ru:8765/ws/${userId}`; // Подключение с client_id (userId)
 
       socketRef.current = new WebSocket(BACKEND_URL);
 

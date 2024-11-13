@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import axios from 'axios';
 import './SupportChat.css';
 import send_logo from '../img/send_logo.svg';
 import mas_svg from '../img/message-logo.svg';
@@ -10,13 +9,15 @@ const SupportChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
-  const [lastUpdateId, setLastUpdateId] = useState(null);
   const [userId, setUserId] = useState(null);
   const chatLogsRef = useRef(null);
-  const processedMessagesRef = useRef(new Set());
-  const botToken = '7421433140:AAEydhYMTmYvUZ9CqowaEADFXW17vewlT_k';
-  const chatId = '7027915437';
+  const socketRef = useRef(null); // Ref для WebSocket соединения
+  const processedMessagesRef = useRef(new Set()); // Множество для уникальности сообщений
+  const [hasFetchedHistory, setHasFetchedHistory] = useState(false); // Состояние для проверки, был ли выполнен запрос
 
+  const API_URL = 'https://nyuroprintapi.ru:8765/api/chat-history'; // URL для получения истории чата
+
+  // Устанавливаем userId и загружаем сообщения при монтировании компонента
   useEffect(() => {
     const storedUserId = localStorage.getItem('supportChatUserId');
     if (storedUserId) {
@@ -27,34 +28,117 @@ const SupportChat = () => {
       setUserId(newUserId);
     }
 
+    // Загружаем старые сообщения из localStorage
     const storedMessages = localStorage.getItem('supportChatMessages');
     if (storedMessages) {
+      setMessages(JSON.parse(storedMessages));
       const parsedMessages = JSON.parse(storedMessages);
-      setMessages(parsedMessages);
       parsedMessages.forEach(msg => processedMessagesRef.current.add(msg.id));
     }
 
-    const storedLastUpdateId = localStorage.getItem('lastUpdateId');
-    if (storedLastUpdateId) {
-      setLastUpdateId(parseInt(storedLastUpdateId));
-    }
-  }, []);
+    // Загружаем историю чата только если она еще не загружена
+    const fetchChatHistory = async () => {
+      const chatId = localStorage.getItem('chat_id');
+      if (chatId && !hasFetchedHistory) {  // Проверка на уже загруженную историю
+        try {
+          const response = await fetch(`${API_URL}?chat_id=${chatId}`);
+          const data = await response.json();
+          if (data.history) {
+            data.history.forEach(msg => {
+              // Пропускаем сообщения с текстом 'None'
+              if (msg && msg !== 'None') {
+                const messageType = msg.startsWith('Пользователь сайта: ') ? 'self' : 'user';
+                const cleanedMessage = msg.replace(/^Пользователь сайта:\s+/g, '');
+                addMessage(generateMessage(cleanedMessage, messageType));
+              }
+            });
+            setHasFetchedHistory(true);  // Отмечаем, что история загружена
+          }
+        } catch (error) {
+          console.error('Ошибка при получении истории чата:', error);
+        }
+      }
+    };
+    
+    fetchChatHistory();
+  }, [hasFetchedHistory]);
 
+  // Подключаемся к WebSocket серверу только один раз
   useEffect(() => {
-    if (chatLogsRef.current) {
-      chatLogsRef.current.scrollTop = chatLogsRef.current.scrollHeight;
-    }
-  }, [messages]);
+    const initializeSocket = () => {
+      if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+        return;
+      }
 
+      const BACKEND_URL = `wss://nyuroprintapi.ru:8765/ws/${userId}`; // Подключение с client_id (userId)
+
+      socketRef.current = new WebSocket(BACKEND_URL);
+
+      socketRef.current.onopen = () => {
+        console.log('WebSocket соединение установлено');
+      };
+
+      socketRef.current.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.uid) {
+          const chat_id = localStorage.getItem('chat_id');
+          if (chat_id) {
+            socketRef.current.send(JSON.stringify({ chat_id: chat_id }));
+          } else {
+            console.error(`chat_id не найден для UID: ${data.uid}`);
+            socketRef.current.send(JSON.stringify({ uid: data.uid }));
+          }
+        }
+
+        if (data.chat_id) {
+          localStorage.setItem('chat_id', data.chat_id);
+          console.log(`chat_id сохранен: ${data.chat_id}`);
+        }
+
+        if (data.text) {
+          addMessage(generateMessage(data.text, 'user'));
+        }
+
+        // Добавьте обработку ошибок или сообщений типа "Invalid message format"
+        if (data.error) {
+          console.error(`Ошибка от сервера: ${data.error}`);
+        }
+      };
+
+      socketRef.current.onerror = (error) => {
+        console.error('WebSocket ошибка:', error);
+        setTimeout(initializeSocket, 5000);
+      };
+
+      socketRef.current.onclose = (event) => {
+        console.error('WebSocket соединение закрыто', event.reason);
+        setTimeout(initializeSocket, 5000);
+      };
+    };
+
+    if (userId) {
+      initializeSocket();
+    }
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
+  }, [userId]); // Переподключение при изменении userId
+
+  // Сохраняем сообщения в localStorage
   useEffect(() => {
     localStorage.setItem('supportChatMessages', JSON.stringify(messages));
   }, [messages]);
 
+  // Прокручиваем чат до самого низа при открытии и добавлении сообщения
   useEffect(() => {
-    if (lastUpdateId) {
-      localStorage.setItem('lastUpdateId', lastUpdateId.toString());
+    if (isOpen && chatLogsRef.current) {
+      chatLogsRef.current.scrollTop = chatLogsRef.current.scrollHeight;
     }
-  }, [lastUpdateId]);
+  }, [isOpen, messages]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -85,71 +169,15 @@ const SupportChat = () => {
     setInputMessage('');
 
     try {
-      await sendMessageToTelegram(inputMessage);
-    } catch (error) {
-      console.error('Error sending message to Telegram:', error);
-    }
-  };
-
-  const sendMessageToTelegram = async (message) => {
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    try {
-      await axios.post(url, {
-        chat_id: chatId,
-        text: `${userId}: ${message}`,
-      });
-    } catch (error) {
-      console.error('Error sending message to Telegram:', error.response ? error.response.data : error.message);
-    }
-  };
-
-  const receiveMessageFromTelegram = useCallback(async () => {
-    const url = `https://api.telegram.org/bot${botToken}/getUpdates`;
-    try {
-      const response = await axios.get(url, {
-        params: {
-          offset: lastUpdateId ? lastUpdateId + 1 : undefined,
-          timeout: 30,
-        },
-      });
-      const updates = response.data.result;
-
-      if (updates.length > 0) {
-        const newMessages = updates.reduce((acc, update) => {
-          const messageText = update.message?.text;
-          const messageId = update.message?.message_id;
-          const messageParts = messageText?.split(': ');
-          const senderId = messageParts?.[0];
-          const messageContent = messageParts?.slice(1).join(': ');
-
-          if (messageContent && senderId === userId && !processedMessagesRef.current.has(messageId)) {
-            const newMessage = {
-              id: messageId,
-              text: messageContent,
-              type: 'user'
-            };
-            acc.push(newMessage);
-          }
-          return acc;
-        }, []);
-
-        newMessages.forEach(addMessage);
-
-        if (updates.length > 0) {
-          setLastUpdateId(updates[updates.length - 1].update_id);
-        }
+      if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+        socketRef.current.send(JSON.stringify({ uid: userId, text: inputMessage }));
+      } else {
+        console.error('WebSocket не открыт');
       }
     } catch (error) {
-      console.error('Error receiving messages from Telegram:', error.response ? error.response.data : error.message);
+      console.error('Ошибка отправки сообщения на сервер:', error);
     }
-  }, [lastUpdateId, userId, addMessage]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      receiveMessageFromTelegram();
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, [receiveMessageFromTelegram]);
+  };
 
   const generateMessage = (msg, type) => {
     return {
@@ -164,7 +192,6 @@ const SupportChat = () => {
       {!isOpen && (
         <div id="chat-circle" className="btn btn-raised" onClick={toggleChat}>
           <img src={mas_svg} alt="Логотип сообщения" />
-          <i className="material-icons"></i>
         </div>
       )}
       

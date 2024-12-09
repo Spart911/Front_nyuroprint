@@ -185,11 +185,12 @@ const Started = () => {
 
       console.log('Ответ от сервера:', response.data);
 
-      if (response.data.defect === 1) {
-        navigate('/defect')
-      } else if (response.data.defect === 0) {
-        navigate('/not-defect')
-      }
+      if (response.data.defect !== 0) {
+        navigate('/defect', { state: { defect: response.data.defect } });
+    } else {
+        navigate('/not-defect');
+    }
+    
     } catch (error) {
       if (error.response) {
         console.error('Ошибка ответа от сервера:', error.response.data);

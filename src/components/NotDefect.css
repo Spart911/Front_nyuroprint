@@ -1,10 +1,87 @@
+/* Existing styles with mobile optimization */
 .not-defect-content {
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    height: calc(100vh - 200px);
     align-items: center;
+    padding: 0 15px; /* Add padding for smaller screens */
+}
+
+.result-evaluation-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.result-evaluation-menu {
+    width: 70%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-evaluation-title {
+    font-size: 24px;
+    margin: 10px;
+    text-align: center;
+}
+
+.rating-scale {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 10px; /* Added gap between rating circles */
+}
+
+.rating-circle {
+    flex: 1; /* Distribute space evenly */
+    aspect-ratio: 1 / 1; /* Maintain square shape */
+    max-width: 50px;
+    max-height: 50px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.rating-circle:hover {
+    transform: scale(1.1);
+}
+
+.rating-circle.selected {
+    transform: scale(1.2);
+}
+
+.rating-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #666;
+    font-size: 14px;
+}
+
+.rating-labels span:first-child {
+    margin-left: 10px;
+}
+
+.rating-labels span:last-child {
+    margin-right: 10px;
 }
 
 .hh1 {
@@ -23,7 +100,6 @@
     border: none;
     cursor: pointer;
     margin-bottom: 20px;
-    border-radius: 15px;
     width: 490px;
     margin-top: 20px;
 }
@@ -35,32 +111,60 @@
     flex-direction: column;
 }
 
+/* Mobile Optimization */
 @media (max-width: 600px) { 
-    .hh1 {
-        font-size: 20px;
+    .not-defect-content {
+        height: auto;
+        min-height: 100vh;
+        padding: 20px 15px;
     }
-    .not-defect-button {
-        font-size: 16px;
-        width: 290px;
-    }
-}
 
-@media (min-width: 601px) and (max-width: 1024px) {
     .hh1 {
         font-size: 24px;
     }
-    .not-defect-button {
+
+    .result-evaluation-title {
+        font-size: 18px;
+    }
+
+    .rating-scale {
+        gap: 5px; /* Reduce gap on smaller screens */
+    }
+
+    .rating-circle {
+        max-width: 45px;
+        max-height: 45px;
+        min-width: 35px;
+        min-height: 35px;
         font-size: 16px;
-        width: 390px;
+    }
+
+    .not-defect-button {
+        width: 100%; /* Full width on mobile */
+        max-width: 320px;
+        font-size: 14px;
+        padding: 15px 20px;
+    }
+
+    .rating-labels {
+        font-size: 12px;
     }
 }
 
-@media (min-width: 1025px) and (max-width: 1536px) {
+/* Tablet Optimization */
+@media (min-width: 601px) and (max-width: 1024px) {
     .hh1 {
         font-size: 36px;
     }
+
     .not-defect-button {
-        font-size: 24px;
-        width: 490px;
+        width: 100%;
+        max-width: 490px;
+        font-size: 16px;
+    }
+
+    .rating-circle {
+        max-width: 50px;
+        max-height: 50px;
     }
 }

@@ -84,3 +84,120 @@
         width: 390px;
     }
 }
+
+.result-evaluation-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.result-evaluation-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-evaluation-title {
+    font-size: 24px;
+    margin: 10px;
+    text-align: center;
+}
+
+.rating-scale {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.rating-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.rating-circle:hover {
+    transform: scale(1.1);
+}
+
+.rating-circle.selected {
+    transform: scale(1.2);
+}
+
+.rating-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: #666;
+    font-size: 14px;
+}
+
+.rating-labels span:first-child {
+    margin-left: 10px;
+}
+
+.rating-labels span:last-child {
+    margin-right: 10px;
+}
+
+.hh1 {
+    font-size: 48px;
+    color: black;
+    text-align: center;
+}
+
+.not-defect-button {
+    background-color: #EBF0EB;
+    color: #61875E;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 20px 25px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    width: 490px;
+    margin-top: 20px;
+}
+
+.content2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 600px) { 
+    .hh1 {
+        font-size: 20px;
+    }
+    .not-defect-button {
+        font-size: 16px;
+        width: 290px;
+    }
+    .result-evaluation-title {
+        font-size: 18px;
+    }
+    .rating-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+

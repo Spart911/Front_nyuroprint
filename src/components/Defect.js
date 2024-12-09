@@ -34,7 +34,6 @@ const Defect = () => {
             localStorage.setItem('rating', JSON.stringify(selectedRating));
 
             console.log('Feedback submitted successfully', response.data);
-            alert('Оценка успешно отправлена!');
         } catch (error) {
             console.error('Error submitting feedback:', error);
             alert('Не удалось отправить оценку. Попробуйте еще раз.');

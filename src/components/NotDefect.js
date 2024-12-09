@@ -30,8 +30,6 @@ const NotDefect = () => {
             setRating(selectedRating);
             setIsSubmitted(true);
 
-            // Optional: Add user feedback
-            alert('Оценка успешно отправлена!');
         } catch (error) {
             // Detailed error logging
             console.error('Error details:', {

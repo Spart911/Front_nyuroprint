@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import Privacy from './components/Privacy';
 import Agreement from './components/Agreement'
 import Help from './components/Help'
+import Lab from './components/Lab'
 import Feedback from './components/Feedback';
 import About from './components/About';
 import Started from './components/Started';
@@ -18,6 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element = {<HomePage/>} />
+          <Route path="/lab" element = {<Lab/>} />
           <Route path="/privacy" element = {<Privacy/>}/>
           <Route path="/agreement" element = {<Agreement/>}/>
           <Route path="/help" element = {<Help/>}/>

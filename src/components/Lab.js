@@ -4,6 +4,7 @@ import Navigatorr from './Navigatorr';
 import './AdaptiveStyles.css';
 import './Lab.css';
 import Helmet from 'react-helmet'
+import { X, Upload } from 'lucide-react';
 import { useEffect } from 'react';
 import logo1 from '../img/Component 5.png';
 import logo2 from '../img/5e356d6acc3937c43a6f01722f09743d 1.png';
@@ -15,7 +16,28 @@ import { useState } from 'react';
 
 
 const Lab = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    contact: '',
+    description: '',
+    files: []
+  });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log('Form submitted:', formData);
+    setIsModalOpen(false);
+  };
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData(prev => ({
+      ...prev,
+      files: files
+    }));
+  };
 
   const projects = [
     {
@@ -142,10 +164,61 @@ const Lab = () => {
         <div class=" block-text-head">Реверс-инжиниринг готовых деталей</div>
         <div class=" block-text-head">Запуск серийного производства</div>
         <div class=" block-text-head">Проектирование и 3D-моделирование</div>
-        <button class="head-button">
+        <div className="head-button" onClick={() => setIsModalOpen(true)}>
           ОСТАВИТЬ ЗАЯВКУ
-        </button>
+        </div>
       </div>
+
+
+
+      {/* Модальное окно */}
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content1">
+            <button onClick={() => setIsModalOpen(false)} className="modal-close-button">
+              <X size={24} />
+            </button>
+            <h2 className="modal-header">Оформление заявки</h2>
+            <form onSubmit={handleSubmit} className="modal-form">
+              <div className="ss">
+                <label>Имя</label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  required
+                />
+              </div>
+              <div className="ss">
+                <label>Контакт</label>
+                <input
+                  type="text"
+                  value={formData.contact}
+                  onChange={(e) => setFormData(prev => ({ ...prev, contact: e.target.value }))}
+                  required
+                />
+              </div>
+              <div className="ss">
+                <label>Описание</label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  required
+                />
+              </div>
+              <div className="ss">
+                <label>Прикрепить файлы</label>
+                <input type="file" multiple onChange={handleFileChange} />
+                {formData.files.length > 0 && (
+                  <div>Выбрано файлов: {formData.files.length}</div>
+                )}
+              </div>
+              <button type="submit">Отправить</button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div class="custom-rectangle">
         <div class="text-block">Почему NYUROPRINT-LAB ?</div>
         

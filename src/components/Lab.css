@@ -633,3 +633,86 @@ img {
   .price-item:hover .price-item-description {
     color: #333333; /* чёрный при наведении */
   }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content1 {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .modal-form div {
+    margin-bottom: 15px;
+  }
+  .modal-form textarea {
+
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 2vw;
+    height: 150px; /* Укажите желаемую высоту */
+    resize: vertical; /* Позволяет изменять высоту вручную (опционально) */
+  }
+  
+  .modal-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 2vw;
+  }
+
+
+  
+  .modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .modal-form button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .modal-form button:hover {
+    background-color: #444;
+  }
+.ss {
+  display: flex;
+ 
+}
+
+.ss label {
+  margin-right: 10px; /* Отступ между текстом и полем */
+  width: 140px;
+}

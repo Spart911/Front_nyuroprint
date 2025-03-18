@@ -1,0 +1,550 @@
+.scaled-html {
+  transform: scale(0.8);
+  transform-origin: top left;
+  overflow-x: hidden; /* Предотвращение горизонтальной прокрутки */
+  width: 125%; /* Увеличиваем ширину для компенсации масштабирования */
+  height: 100%; /* Высота документа */
+  margin: 0;
+  padding: 0;
+}
+.get-started-content {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .blockk {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-between;
+    padding-bottom: 15px;
+  }
+
+  .link {
+    color: #496B4D;
+  }
+  
+  .selection-block, .upload-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(50% - 40px);
+  }
+
+  .selection-block {
+    justify-content: space-between;
+  }
+
+  .printer-selection {
+    position: relative;
+    width: 100%;
+  }
+  
+  .printer-selection select {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; /* Добавляем отступ для иконки */
+    font-size: 21px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
+    background-color: #EBF0EB;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  
+  .printer-selection::after {
+    content: '';
+    position: absolute;
+    right: 15px; /* Расположение иконки правее */
+    top: 63%;
+    transform: translateY(-50%);
+    width: 40px; /* Ширина иконки */
+    height: 40px; /* Высота иконки */
+    background-image: url('@/shared/img/drop-down.svg'); /* Путь к иконке */
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none; /* Иконка не будет влиять на клики */
+  }
+
+  .printer-selection select:focus {
+    outline: none;
+  }
+
+  .quality-selection {
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: calc(100% - 10px);
+  }
+
+  .quality-block.active, .quality-block:hover {
+    background-color: #EBF0EB;
+    border-left: 4px solid #61875E;
+    width: calc(100% - 20px);
+  }
+
+  .quality-block h3 {
+    margin-right: 10px;
+    font-weight: 600;
+  }
+  
+  .quality-block p {
+    font-size: 14px;
+    color: #61875E;
+  }
+
+   .quality-block {
+    /* display: flex; */
+    align-items:flex-start;
+    padding-left: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-direction: column;
+    /* border: 0.5px solid #46623b; */
+  }
+
+
+
+  .upload-block {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: calc(50% - 150px);
+  }
+  
+  .upload-photo img{
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  .upload-photo {
+    height: 70%;
+    display: flex;
+  }
+  
+  .upload-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+  }
+  
+  .upload-info p {
+    color: black;
+  }
+
+.upload-info .upload-file {
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    height:40px;
+}
+
+.upload-info .upload-file::before {
+    content: 'Загрузить фотографию детали';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #61875E;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.upload-info .upload-file:hover::before {
+    background-color: #496B4D;
+}
+
+.upload-info .upload-file input[type='file'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: transparent;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .blockk {
+        flex-direction: column;
+    }
+
+    .selection-block, .upload-block {
+        width: 100%;
+    }
+
+    .instruction-block h1 {
+        font-size: 24px;
+    }
+
+    .instruction-block p {
+        font-size: 20px;
+    }
+}
+
+
+  /* .upload-info input {
+    background-color: #61875E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-info input:hover {
+    background-color: #46623b;
+} */
+
+/* Основные стили для модального окна */
+.modal-overlay {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Стили для содержимого модального окна */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 70%;
+  max-height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Стили для кнопки закрытия */
+.close-button {
+  align-self: flex-end;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 10px; /* Добавим немного отступа снизу */
+  padding: 0; /* Убираем padding */
+  box-sizing: border-box; /* Обеспечиваем учет всех размеров внутри элемента */
+  transition: none; /* Убираем все переходы */
+}
+
+/* Убираем эффекты при наведении */
+.close-button:hover {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  padding: 0;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  transform: none; /* Убираем любые трансформации */
+}
+
+/* Убираем эффекты при нажатии */
+.close-button:active {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  padding: 0;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  transform: none; /* Убираем любые трансформации */
+}
+
+/* Убираем эффекты при фокусировке */
+.close-button:focus {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  padding: 0;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  transform: none; /* Убираем любые трансформации */
+  outline: none; /* Убираем обводку при фокусе */
+}
+
+/* Стили для прокручиваемой области */
+.modal-body {
+  flex-grow: 1;
+  overflow-y: auto; /* Включение вертикальной прокрутки */
+}
+:root {
+  --duration: 1.5s;
+  --container-size: 250px;
+  --box-size: 33px;
+  --box-border-radius: 15%;
+}
+.popup {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255);
+    display: flex;
+    justify-content: center;
+}
+.cont {
+  width: var(--container-size);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.📦 {
+  width: var(--box-size);
+  height: var(--box-size);
+  position: relative;
+  display: block;
+  transform-origin: -50% center;
+  border-radius: var(--box-border-radius);
+}
+.📦:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: lightblue;
+  border-radius: var(--box-border-radius);
+  box-shadow: 0px 0px 10px 0px rgba(28, 159, 255, 0.4);
+}
+.📦:nth-child(1) {
+  animation: slide var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(1):after {
+  animation: color-change var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(2) {
+  animation: flip-1 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(2):after {
+  animation: squidge-1 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(3) {
+  animation: flip-2 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(3):after {
+  animation: squidge-2 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(4) {
+  animation: flip-3 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(4):after {
+  animation: squidge-3 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(5) {
+  animation: flip-4 var(--duration) ease-in-out infinite alternate;
+}
+.📦:nth-child(5):after {
+  animation: squidge-4 var(--duration) ease-in-out infinite alternate;
+}
+
+.📦:nth-child(2):after {
+  background-color: #5ea05a;
+}
+.📦:nth-child(3):after {
+  background-color: #6bb467;
+}
+.📦:nth-child(4):after {
+  background-color: #78c974;
+}
+.📦:nth-child(5):after {
+  background-color: #84db80;
+}
+
+@keyframes slide {
+  0% {
+    background-color: #5ea05a;
+    transform: translatex(0vw);
+  }
+  100% {
+    background-color: #84db80;
+    transform: translatex(
+      calc(var(--container-size) - (var(--box-size) * 1.25))
+    );
+  }
+}
+
+@keyframes color-change {
+  0% {
+    background-color: #5ea05a;
+  }
+  100% {
+    background-color: #84db80;
+  }
+}
+
+@keyframes flip-1 {
+  0%,
+  15% {
+    transform: rotate(0);
+  }
+  35%,
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-1 {
+  5% {
+    transform-origin: center bottom;
+    transform: scalex(1) scaley(1);
+  }
+  15% {
+    transform-origin: center bottom;
+    transform: scalex(1.3) scaley(0.7);
+  }
+  25%,
+  20% {
+    transform-origin: center bottom;
+    transform: scalex(0.8) scaley(1.4);
+  }
+  55%,
+  100% {
+    transform-origin: center top;
+    transform: scalex(1) scaley(1);
+  }
+  40% {
+    transform-origin: center top;
+    transform: scalex(1.3) scaley(0.7);
+  }
+}
+
+@keyframes flip-2 {
+  0%,
+  30% {
+    transform: rotate(0);
+  }
+  50%,
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-2 {
+  20% {
+    transform-origin: center bottom;
+    transform: scalex(1) scaley(1);
+  }
+  30% {
+    transform-origin: center bottom;
+    transform: scalex(1.3) scaley(0.7);
+  }
+  40%,
+  35% {
+    transform-origin: center bottom;
+    transform: scalex(0.8) scaley(1.4);
+  }
+  70%,
+  100% {
+    transform-origin: center top;
+    transform: scalex(1) scaley(1);
+  }
+  55% {
+    transform-origin: center top;
+    transform: scalex(1.3) scaley(0.7);
+  }
+}
+
+@keyframes flip-3 {
+  0%,
+  45% {
+    transform: rotate(0);
+  }
+  65%,
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-3 {
+  35% {
+    transform-origin: center bottom;
+    transform: scalex(1) scaley(1);
+  }
+  45% {
+    transform-origin: center bottom;
+    transform: scalex(1.3) scaley(0.7);
+  }
+  55%,
+  50% {
+    transform-origin: center bottom;
+    transform: scalex(0.8) scaley(1.4);
+  }
+  85%,
+  100% {
+    transform-origin: center top;
+    transform: scalex(1) scaley(1);
+  }
+  70% {
+    transform-origin: center top;
+    transform: scalex(1.3) scaley(0.7);
+  }
+}
+
+@keyframes flip-4 {
+  0%,
+  60% {
+    transform: rotate(0);
+  }
+  80%,
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes squidge-4 {
+  50% {
+    transform-origin: center bottom;
+    transform: scalex(1) scaley(1);
+  }
+  60% {
+    transform-origin: center bottom;
+    transform: scalex(1.3) scaley(0.7);
+  }
+  70%,
+  65% {
+    transform-origin: center bottom;
+    transform: scalex(0.8) scaley(1.4);
+  }
+  100%,
+  100% {
+    transform-origin: center top;
+    transform: scalex(1) scaley(1);
+  }
+  85% {
+    transform-origin: center top;
+    transform: scalex(1.3) scaley(0.7);
+  }
+}
+

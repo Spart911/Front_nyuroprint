@@ -1,0 +1,303 @@
+.HomePage {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .carousel-section1 {
+    font-size: 24px;
+  }
+  
+  .photo-section{
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 540px;
+    border-radius: 15px 15px 15px 15px;
+    display: flex;
+    margin-top: 25px;
+    color: white;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 2);
+    border-radius: 15px 15px 15px 15px;
+  }
+  
+  .content {
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    color: white;
+  }
+  
+  .content h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+  }
+  
+  .content p {
+    font-size: 24px;
+    margin-bottom: 35px;
+  }
+  
+  .frame{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #ffffff;
+    color: #73C66D;
+    border-radius: 15px 15px 15px 15px;
+    width: 500px;
+  }
+  
+  .frame-text{
+    margin-left: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-top: 35px;
+    background-color: #D9D9D9;
+    border-radius: 15px 15px 15px 15px;
+  }
+  
+  .button-text {
+    padding: 10px 20px;
+    margin-right: 10px;
+    color: #73C66D;
+    font-size: 1.2rem;
+  }
+  
+  .button-container span {
+    border-radius: 15px 15px 15px 15px;
+    padding: 10px 20px;
+  }
+  
+
+  .button, .cta-button {
+    background: #73C66D;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    display: inline-block;
+    font-size: 16px;
+    border: none; /* Убирает рамку вокруг кнопки */
+    transition: none;
+  }
+  
+  .button:focus, .cta-button:focus {
+    outline: none; /* Убирает обводку при фокусе */
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .button:hover, .cta-button:hover {
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    display: inline-block;
+    font-size: 16px;
+    border: none;
+    background-color: #4CAF50; /* Сохраняет цвет фона при наведении */
+    color: white; /* Сохраняет цвет текста при наведении */
+  }
+  .text-section {
+    text-align: left;
+    line-height: 1.5;
+    padding: 25px 200px 25px 0;
+  }
+  
+  .text-section h1,
+  .text-section p {
+    margin: 0 0 20px 0;
+  }
+  
+  .text-section a {
+    text-decoration: none;
+    color: #61875E;
+  }
+  
+  .cards-section {
+    display: flex;
+    margin-bottom: 25px;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  
+  .card {
+    display: flex;
+    margin-bottom: 25px;
+  }
+  
+  .card img {
+    display: flex;
+    width: 50%;
+    height: 450px;
+    border-radius: 15px 15px 15px 15px;
+  }
+  
+  .text-content {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-justify: inter-word;
+  }
+  
+  .text-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .text-content p {
+    font-size: 16px;
+    width: 100%;
+    margin: 15px 0;
+  }
+  
+  .carousel-title {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  
+  .carousel-section {
+    font-size: 24px;
+    margin-bottom: 84px;
+  }
+  
+  .logo-container2 {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    justify-content: space-between;
+    background-color: #EBF0EB;
+    padding: 15px;
+  }
+  
+  .logo-container2 img {
+    padding: 20px;
+    min-width: 80px;
+  }
+
+  .accordion {
+    width: 100%;
+    margin: 94px auto;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .accordion-item {
+    /* background-color: #fff; */
+    border-bottom: 1.5px solid black;
+    /* margin-bottom: 5px; */
+  }
+
+  .accordion-t {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 36px;
+  }
+
+  .accordion-title {
+    font-size: 12px; /* заголовок */
+    cursor: pointer;
+    background-color: #fff;
+    margin: 0;
+    padding: 15px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .accordion-title:hover,
+.accordion-title.active {
+  background-color: #EBF0EB;
+}
+
+.accordion-content {
+  display: none; 
+  padding: 0px 35px;
+  border-top: 0;
+}
+
+.accordion-content.active {
+  display: block; 
+}
+
+.accordion-icon {
+  float: right; 
+  transition: transform 0.3s ease; 
+  font-size: 16px;
+}
+
+.accordion-icon.open {
+  transform: rotate(180deg); 
+}
+  
+  @media (max-width: 1536px) {
+    .text-section {
+      padding: 25px 100px 25px 0;
+    }
+    .content p {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .content h1 {
+      font-size: 24px;
+    }
+    .content p {
+      font-size: 12px;
+    }
+    .content {
+      left: 25px;
+    }
+    .text-section {
+      padding: 25px 0 25px 0;
+    }
+    .text-content h2 {
+      font-size: 16px;
+    }
+    .text-content p {
+      font-size: 12px;
+    }
+    .card img {
+      display: none;
+    }
+    .frame{
+      width: 300px;
+    }
+    .carousel-title {
+      font-size: 24px;
+    }
+    .accordion-title {
+      font-size: auto;
+    }
+  }

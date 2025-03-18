@@ -51,20 +51,24 @@ const AddPrinter = ({ onSave }: AddPrinterPageProps) => {
   };
   const addNewPrinter = async (e: any) => {
     e.preventDefault();
+  
     let dataToSave;
-    switch (formState) {
-      case "state1":
-        dataToSave = printerData1;
-        break;
-      case "state2":
-        dataToSave = printerData2;
-        break;
-      case "state3":
-        dataToSave = printerData3;
-        break;
-      default:
-        break;
+  
+    // Здесь используем printer_data, который меняется в зависимости от состояния формы
+    if (formState === "state1") {
+      dataToSave = printerData1;
+    } else if (formState === "state2") {
+      dataToSave = printerData2;
+    } else if (formState === "state3") {
+      dataToSave = printerData3;
     }
+  
+    // Если нет данных для сохранения, прекращаем выполнение
+    if (!dataToSave) {
+      console.error("Нет данных для сохранения.");
+      return;
+    }
+  
     try {
       const response = await axios.post(
         "https://nyuroprintapiv1.ru:5000/api/printers/",
@@ -75,16 +79,34 @@ const AddPrinter = ({ onSave }: AddPrinterPageProps) => {
           },
         }
       );
+      
       const printerId = response.data.printer_id;
-      AddIdToCookie(printerId);
-      console.info("Принтер успешно добавлен");
-      setTimeout(() => {
-        // onSave(printerId); // Вызываем функцию onSave, передавая в неё данные нового принтера
-      }, 2000);
-    } catch (error) {
-      console.error("Ошибка при добавлении принтера", error);
+      if (printerId) {
+        AddIdToCookie(printerId);
+        console.info("Принтер успешно добавлен");
+        
+        // Вызываем onSave через 2 секунды, если это необходимо
+        setTimeout(() => {
+          // onSave(printerId); // Если нужно, раскомментируйте эту строку
+        }, 2000);
+      } else {
+        console.error("Не удалось получить идентификатор принтера");
+      }
+    } catch (error: any) {  // Приводим error к типу 'any'
+      // Проверка типа ошибки и вывод более подробной информации
+      if (error.response) {
+        // Сервер вернул ошибку (например, 400 или 500)
+        console.error("Ошибка при добавлении принтера:", error.response.data);
+      } else if (error.request) {
+        // Ошибка в сети (например, сервер не доступен)
+        console.error("Ошибка сети при добавлении принтера:", error.request);
+      } else {
+        // Любая другая ошибка
+        console.error("Неизвестная ошибка:", error.message);
+      }
     }
   };
+  
 
   const renderFormState = () => {
     switch (formState) {

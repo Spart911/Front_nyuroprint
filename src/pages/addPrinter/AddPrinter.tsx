@@ -7,105 +7,57 @@ interface AddPrinterPageProps {
   onSave?: any;
 }
 
-const AddPrinter = ({ onSave }: AddPrinterPageProps) => {
-  const [formState, setFormState] = useState("state1");
-  const [printerData1, setPrinterData1] = useState<any>({});
-  const [printerData2, setPrinterData2] = useState<any>({});
-  const [printerData3, setPrinterData3] = useState<any>({});
-
-  const handleStateChange = (newState: any) => {
-    setFormState(newState);
-  };
-
-  const handleInputChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
-    switch (formState) {
-      case "state1":
-        setPrinterData1({
-          ...printerData1,
-          [name]: type === "checkbox" ? checked : value,
-        });
-        break;
-      case "state2":
-        setPrinterData2({
-          ...printerData2,
-          [name]: type === "checkbox" ? checked : value,
-        });
-        break;
-      case "state3":
-        setPrinterData3({
-          ...printerData3,
-          [name]: type === "checkbox" ? checked : value,
-        });
-        break;
-      default:
-        break;
-    }
-  };
-  const AddIdToCookie = (id: any) => {
-    let ids = Cookies.get("ids") ? Cookies.get("ids").split(",") : [];
-    if (!ids.includes(id.toString())) {
-      ids.push(id);
-      Cookies.set("ids", ids.join(","), { expires: 365 });
-    }
-  };
-  const addNewPrinter = async (e: any) => {
-    e.preventDefault();
+const addNewPrinter = async (e: any) => {
+  e.preventDefault();
+  let dataToSave;
   
-    let dataToSave;
-  
-    // Здесь используем printer_data, который меняется в зависимости от состояния формы
-    if (formState === "state1") {
+  switch (formState) {
+    case "state1":
       dataToSave = printerData1;
-    } else if (formState === "state2") {
+      break;
+    case "state2":
       dataToSave = printerData2;
-    } else if (formState === "state3") {
+      break;
+    case "state3":
       dataToSave = printerData3;
-    }
-  
-    // Если нет данных для сохранения, прекращаем выполнение
-    if (!dataToSave) {
-      console.error("Нет данных для сохранения.");
+      break;
+    default:
+      console.warn("Неизвестное состояние формы");
       return;
-    }
+  }
   
-    try {
-      const response = await axios.post(
-        "https://nyuroprintapiv1.ru:5000/api/printers/",
-        dataToSave,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      
-      const printerId = response.data.printer_id;
-      if (printerId) {
-        AddIdToCookie(printerId);
-        console.info("Принтер успешно добавлен");
-        
-        // Вызываем onSave через 2 секунды, если это необходимо
-        setTimeout(() => {
-          // onSave(printerId); // Если нужно, раскомментируйте эту строку
-        }, 2000);
-      } else {
-        console.error("Не удалось получить идентификатор принтера");
+  if (!dataToSave) {
+    console.error("Нет данных для сохранения");
+    return;
+  }
+  
+  try {
+    const response = await axios.post(
+      "https://nyuroprintapiv1.ru:5000/api/printers/",
+      JSON.stringify(dataToSave),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    } catch (error: any) {  // Приводим error к типу 'any'
-      // Проверка типа ошибки и вывод более подробной информации
-      if (error.response) {
-        // Сервер вернул ошибку (например, 400 или 500)
-        console.error("Ошибка при добавлении принтера:", error.response.data);
-      } else if (error.request) {
-        // Ошибка в сети (например, сервер не доступен)
-        console.error("Ошибка сети при добавлении принтера:", error.request);
-      } else {
-        // Любая другая ошибка
-        console.error("Неизвестная ошибка:", error.message);
-      }
+    );
+    
+    const printerId = response.data?.printer_id;
+    if (!printerId) {
+      throw new Error("Ответ сервера не содержит printer_id");
     }
-  };
+    
+    AddIdToCookie(printerId);
+    console.info("Принтер успешно добавлен");
+    
+    setTimeout(() => {
+      // onSave(printerId); // Вызываем функцию onSave, передавая в неё данные нового принтера
+    }, 2000);
+  } catch (error) {
+    console.error("Ошибка при добавлении принтера:", error.response?.data || error.message);
+  }
+};
+
   
 
   const renderFormState = () => {

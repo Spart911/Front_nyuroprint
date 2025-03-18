@@ -84,6 +84,7 @@ const AddPrinter = ({ onSave }: AddPrinterPageProps) => {
       }, 2000);
     } catch (error) {
       console.error("Ошибка при добавлении принтера", error);
+      console.log("Ошибка при добавлении принтера", error);
     }
   };
 

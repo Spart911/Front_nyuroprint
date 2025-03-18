@@ -99,6 +99,12 @@ body.lab-page {
   margin-bottom: 5vh;
 }
 
+@media (max-width: 768px) {
+  .text-2block {
+    font-size: 1.5rem; /* Размер шрифта для мобильных устройств */
+  }
+}
+
 .block-tech{
   display: flex; /* Включаем Flexbox */
   flex-direction:row; /* Элементы будут расположены в столбик */

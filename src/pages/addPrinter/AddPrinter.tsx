@@ -80,7 +80,7 @@ const AddPrinter = ({ onSave }: AddPrinterPageProps) => {
       AddIdToCookie(printerId);
       console.info("Принтер успешно добавлен");
       setTimeout(() => {
-        // onSave(printerId); // Вызываем функцию onSave, передавая в неё данные нового принтера
+        onSave(printerId); // Вызываем функцию onSave, передавая в неё данные нового принтера
       }, 2000);
     } catch (error) {
       console.error("Ошибка при добавлении принтера", error);

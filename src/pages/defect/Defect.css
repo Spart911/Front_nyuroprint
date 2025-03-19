@@ -7,7 +7,6 @@
 }
 
 .defect-title {
-    /* font-size: 48px; */
     letter-spacing: -1px;
     font-family: monospace;
     font-weight: 600;
@@ -21,7 +20,6 @@
     font-size: 20px;
     margin-bottom: 10px;
     margin-top: 5px;
-    /* margin-bottom: 40px; */
 }
 
 .defect-button {
@@ -29,94 +27,36 @@
     color: #61875E;
     font-size: 16px;
     font-weight: 600;
-    padding: 20px 25px;
+    padding: 15px 20px;
     border-radius: 15px;
     border: none;
     cursor: pointer;
     margin-bottom: 20px;
-    border-radius: 15px;
-    width: 590px;
+    width: 500px;
     margin-top: 20px;
-}
-
-.icon-text {
-    /* display: flex; */
-    flex-direction: column;
-    margin-left: 10px;
-}
-
-.ic {
-    /* margin-bottom: 15px; */
-    display: flex;
-    align-items: center;
-    /* padding: 10px; */
-}
-
-.fas {
-    margin-right: 10px;
-    /* background-color: #D9D9D9; */
-    align-items: center;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.icon-text-top, 
-.icon-text-bottom {
-    letter-spacing: -1px;
-    font-family: monospace;
-    display: block;
-}
-
-.icon-text-bottom {
-    color:#61875E;
-    font-size: 12px;
-}
-
-@media (max-width: 600px) { 
-    .defect-title {
-        font-size: 36px;
-    }
-
-    .extrusion-text {
-        font-size: 18px;
-    }
-
-    .defect-button {
-        font-size: 18px;
-        width: 350px;
-    }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-    .defect-button {
-        font-size: 18px;
-        width: 390px;
-    }
 }
 
 .result-evaluation-container {
     width: 100%;
-    display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .result-evaluation-menu {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* width: 100%; */
-    max-width: 600px;
-    padding: 20px;
+    max-width: 400px;
+    padding: 15px;
     background-color: #f9f9f9;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .result-evaluation-title {
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -124,12 +64,12 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .rating-circle {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -137,7 +77,7 @@
     cursor: pointer;
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     transition: transform 0.2s, border 0.2s;
 }
 
@@ -146,7 +86,7 @@
 }
 
 .rating-circle.selected {
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
 .rating-labels {
@@ -154,60 +94,38 @@
     justify-content: space-between;
     width: 100%;
     color: #666;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .rating-labels span:first-child {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .rating-labels span:last-child {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
-.hh1 {
-    font-size: 48px;
-    color: black;
+.feedback-thanks {
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
     text-align: center;
 }
 
-.not-defect-button {
-    background-color: #EBF0EB;
-    color: #61875E;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 20px 25px;
-    border-radius: 15px;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    width: 490px;
-    margin-top: 20px;
-}
-
-.content2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 @media (max-width: 600px) { 
-    .hh1 {
-        font-size: 20px;
-    }
-    .not-defect-button {
-        font-size: 16px;
-        width: 290px;
+    .result-evaluation-menu {
+        max-width: 320px;
+        padding: 10px;
     }
     .result-evaluation-title {
-        font-size: 18px;
+        font-size: 16px;
     }
     .rating-circle {
-        width: 40px;
-        height: 40px;
-        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .rating-labels {
+        font-size: 10px;
     }
 }
-

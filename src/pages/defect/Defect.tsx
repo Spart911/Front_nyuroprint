@@ -5,6 +5,7 @@ import "@/shared/styles/AdaptiveStyles.css";
 import Helmet from "react-helmet";
 import { useLocation } from "react-router-dom";
 import SupportChat from "../supportChat/SupportChat";
+import { useEffect } from "react";
 
 // Определение интерфейсов для типизации
 interface Solution {
@@ -218,8 +219,26 @@ interface LocationState {
 
 const Defect: React.FC = () => {
   const location = useLocation();
-  // Используем воспаленное приведение типов для location.state
+  // Используем приведение типов для location.state
   const defects: number[] = (location.state as LocationState)?.defects || [];
+
+  // Добавляем логирование при монтировании компонента
+  useEffect(() => {
+    console.log("Компонент Defect смонтирован");
+    console.log("Состояние location:", location);
+    console.log("Обнаруженные дефекты:", defects);
+    
+    // Логирование доступных рекомендаций
+    console.log("Доступные рекомендации:", defectRecommendations);
+    
+    // Возвращаем функцию очистки, которая будет вызвана при размонтировании
+    return () => {
+      console.log("Компонент Defect размонтирован");
+    };
+  }, [location, defects]);
+
+  // Логирование перед рендерингом
+  console.log("Рендеринг компонента Defect с", defects.length, "дефектами");
 
   return (
     <>
@@ -230,22 +249,35 @@ const Defect: React.FC = () => {
           <div className="defect-content">
             {defects.length > 0 ? (
               defects.map((defect: number, index: number) => {
+                console.log(`Обработка дефекта ${defect} (${index + 1}/${defects.length})`);
                 const defectData = defectRecommendations[defect];
+                
+                // Логирование данных дефекта
+                if (defectData) {
+                  console.log(`Дефект ${defect}: ${defectData.title}`);
+                  console.log(`Количество решений: ${defectData.solutions.length}`);
+                } else {
+                  console.warn(`Для дефекта ${defect} нет рекомендаций`);
+                }
+                
                 return defectData ? (
                   <div key={index}>
                     <h1 className="defect-title">
                       Обнаружен дефект: <span style={{ color: "#61875E" }}>{defectData.title}</span>
                     </h1>
                     <p>{defectData.description}</p>
-                    {defectData.solutions.map((solution: Solution, solIndex: number) => (
-                      <div className="ic" key={solIndex}>
-                        <i className={solution.icon} />
-                        <div className="icon-text">
-                          <p className="icon-text-top">{solution.title}</p>
-                          <p className="icon-text-bottom">{solution.description}</p>
+                    {defectData.solutions.map((solution: Solution, solIndex: number) => {
+                      console.log(`Решение ${solIndex + 1} для дефекта ${defect}: ${solution.title}`);
+                      return (
+                        <div className="ic" key={solIndex}>
+                          <i className={solution.icon} />
+                          <div className="icon-text">
+                            <p className="icon-text-top">{solution.title}</p>
+                            <p className="icon-text-bottom">{solution.description}</p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 ) : null;
               })
@@ -253,7 +285,12 @@ const Defect: React.FC = () => {
               <p>Дефекты не найдены</p>
             )}
             <a href="/started">
-              <button className="defect-button">Вернуться к анализу</button>
+              <button 
+                className="defect-button" 
+                onClick={() => console.log("Нажата кнопка возврата к анализу")}
+              >
+                Вернуться к анализу
+              </button>
             </a>
           </div>
         </div>

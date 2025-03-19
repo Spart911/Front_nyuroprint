@@ -240,6 +240,43 @@ const Defect: React.FC = () => {
   // Логирование перед рендерингом
   console.log("Рендеринг компонента Defect с", defects.length, "дефектами");
 
+  const handleDefectRendering = (defect: number, index: number) => {
+    try {
+      const defectData = defectRecommendations[defect];
+      if (!defectData) {
+        console.warn(`Для дефекта ${defect} нет рекомендаций`);
+        return null; // Если данных по дефекту нет, ничего не рендерим
+      }
+
+      console.log(`Дефект ${defect}: ${defectData.title}`);
+      console.log(`Количество решений: ${defectData.solutions.length}`);
+
+      return (
+        <div key={index}>
+          <h1 className="defect-title">
+            Обнаружен дефект: <span style={{ color: "#61875E" }}>{defectData.title}</span>
+          </h1>
+          <p>{defectData.description}</p>
+          {defectData.solutions.map((solution: Solution, solIndex: number) => {
+            console.log(`Решение ${solIndex + 1} для дефекта ${defect}: ${solution.title}`);
+            return (
+              <div className="ic" key={solIndex}>
+                <i className={solution.icon} />
+                <div className="icon-text">
+                  <p className="icon-text-top">{solution.title}</p>
+                  <p className="icon-text-bottom">{solution.description}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      );
+    } catch (error) {
+      console.error("Ошибка при обработке дефекта:", error);
+      return <p>Ошибка при загрузке данных дефекта.</p>;
+    }
+  };
+
   return (
     <>
       <Header />
@@ -250,36 +287,7 @@ const Defect: React.FC = () => {
             {defects.length > 0 ? (
               defects.map((defect: number, index: number) => {
                 console.log(`Обработка дефекта ${defect} (${index + 1}/${defects.length})`);
-                const defectData = defectRecommendations[defect];
-                
-                // Логирование данных дефекта
-                if (defectData) {
-                  console.log(`Дефект ${defect}: ${defectData.title}`);
-                  console.log(`Количество решений: ${defectData.solutions.length}`);
-                } else {
-                  console.warn(`Для дефекта ${defect} нет рекомендаций`);
-                }
-                
-                return defectData ? (
-                  <div key={index}>
-                    <h1 className="defect-title">
-                      Обнаружен дефект: <span style={{ color: "#61875E" }}>{defectData.title}</span>
-                    </h1>
-                    <p>{defectData.description}</p>
-                    {defectData.solutions.map((solution: Solution, solIndex: number) => {
-                      console.log(`Решение ${solIndex + 1} для дефекта ${defect}: ${solution.title}`);
-                      return (
-                        <div className="ic" key={solIndex}>
-                          <i className={solution.icon} />
-                          <div className="icon-text">
-                            <p className="icon-text-top">{solution.title}</p>
-                            <p className="icon-text-bottom">{solution.description}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : null;
+                return handleDefectRendering(defect, index);
               })
             ) : (
               <p>Нет обнаруженных дефектов для отображения.</p>

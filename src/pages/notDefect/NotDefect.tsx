@@ -91,7 +91,7 @@ const NotDefect = () => {
         </div>
             <div className="container">
                 <div className="content2">
-                    <h1 className="hh1">ДЕФЕКТ НЕ ОБНАРУЖЕН</h1>
+                    <h1 className="hh1">ДЕФЕКТЫ НЕ ОБНАРУЖЕНЫ</h1>
                     <a href="/started">
                         <button className="not-defect-button">Вернуться к анализу дефектов</button>
                     </a>

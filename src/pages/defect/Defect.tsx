@@ -233,7 +233,7 @@ const Defect: React.FC = () => {
   const handleRatingChange = async (selectedRating: any) => {
     try {
       const response = await axios.post(
-        "https://nyuroprintapi.ru:5000/api/feedback/",
+        "https://nyuroprintapiv1.ru:5000/api/feedback/",
         { rating: selectedRating },
         {
           headers: {

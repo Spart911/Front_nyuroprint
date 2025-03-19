@@ -1,5 +1,7 @@
 import "./Defect.css";
 import Header from "../../widgets/header/Header";
+import axios from "axios";
+import { useState } from "react";
 import "@/shared/styles/AdaptiveStyles.css";
 //@ts-ignore
 import Helmet from "react-helmet";
@@ -212,15 +214,43 @@ const defectRecommendations: DefectRecommendations = {
   },
 };
 
-// Добавляем типизацию для location.state
-interface LocationState {
-  defects: number[];
-}
 
 const Defect: React.FC = () => {
+  const [rating, setRating] = useState(() => {
+    const savedRating = localStorage.getItem("rating");
+    return savedRating ? JSON.parse(savedRating) : 0;
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const location = useLocation();
   // Используем приведение типов для location.state
   const defects = (location.state as LocationState)?.defect || [];
+
+  const handleRatingChange = async (selectedRating: any) => {
+    try {
+      const response = await axios.post(
+        "https://nyuroprintapi.ru:5000/api/feedback/",
+        { rating: selectedRating },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setRating(selectedRating);
+      setIsSubmitted(true);
+
+      localStorage.setItem("rating", JSON.stringify(selectedRating));
+
+      console.log("Feedback submitted successfully", response.data);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      alert("Не удалось отправить оценку. Попробуйте еще раз.");
+    }
+  };
+
+  const ratingEmojis = ["😫", "😕", "😐", "🙂", "😄"];
+  const ratingColors = ["#FF4D4D", "#FF9F1C", "#FFD700", "#90EE90", "#2ECC71"];
 
   // Добавляем логирование при монтировании компонента
   useEffect(() => {
@@ -256,7 +286,7 @@ const Defect: React.FC = () => {
           <h1 className="defect-title">
             Обнаружен дефект: <span style={{ color: "#61875E" }}>{defectData.title}</span>
           </h1>
-          <p>{defectData.description}</p>
+          <p className="extrusion-text">{defectData.description}</p>
           {defectData.solutions.map((solution: Solution, solIndex: number) => {
             console.log(`Решение ${solIndex + 1} для дефекта ${defect}: ${solution.title}`);
             return (
@@ -284,6 +314,46 @@ const Defect: React.FC = () => {
       <main>
         <div className="container">
           <div className="defect-content">
+
+          <div className="result-evaluation-container">
+                  <div className="result-evaluation-menu">
+                    <h2 className="result-evaluation-title">
+                      Оцените результат
+                    </h2>
+                    <div className="rating-scale">
+                      {ratingEmojis.map((emoji, index) => (
+                        <div
+                          key={index + 1}
+                          className={`rating-circle ${
+                            rating === index + 1 ? "selected" : ""
+                          }`}
+                          style={{
+                            backgroundColor: ratingColors[index],
+                            border:
+                              rating === index + 1 ? "3px solid #000" : "none",
+                            cursor: isSubmitted ? "default" : "pointer",
+                          }}
+                          onClick={() =>
+                            !isSubmitted && handleRatingChange(index + 1)
+                          }
+                        >
+                          {emoji}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="rating-labels">
+                      <span>Совсем не доволен</span>
+                      <span>Очень доволен</span>
+                    </div>
+                    {isSubmitted && (
+                      <div className="feedback-thanks">
+                        Спасибо за вашу оценку!
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+        
             {defects.length > 0 ? (
               defects.map((defect: number, index: number) => {
                 console.log(`Обработка дефекта ${defect} (${index + 1}/${defects.length})`);

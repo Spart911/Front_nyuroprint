@@ -217,7 +217,9 @@ interface LocationState {
 }
 
 const Defect: React.FC = () => {
+  console.log("________");
   const location = useLocation();
+  console.log((location.state as LocationState)?.defects || []);
   const defects = (location.state as LocationState)?.defects || [];
 
   // Логируем сразу при монтировании компонента

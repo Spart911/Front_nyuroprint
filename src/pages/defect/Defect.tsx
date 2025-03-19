@@ -315,7 +315,14 @@ const Defect: React.FC = () => {
   return (
     <>
       <Header />
-      <Helmet />
+      <Helmet
+        link={[
+          {
+            rel: "stylesheet",
+            href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
+          },
+        ]}
+      />
       <main>
         <div className="container">
           <div className="defect-content">

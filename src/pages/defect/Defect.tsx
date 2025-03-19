@@ -214,6 +214,11 @@ const defectRecommendations: DefectRecommendations = {
   },
 };
 
+// Добавляем типизацию для location.state
+interface LocationState {
+  defect: number[];
+}
+
 
 const Defect: React.FC = () => {
   const [rating, setRating] = useState(() => {

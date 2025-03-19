@@ -96,7 +96,7 @@
 .result-evaluation-container {
     width: 100%;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .result-evaluation-menu {
@@ -112,7 +112,7 @@
 }
 
 .result-evaluation-title {
-    font-size: 24px;
+    font-size: 17px;
     margin-top: 0;
     margin-bottom: 20px;
     text-align: center;

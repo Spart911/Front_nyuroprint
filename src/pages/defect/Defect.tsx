@@ -327,6 +327,17 @@ const Defect: React.FC = () => {
         <div className="container">
           <div className="defect-content">
 
+        
+            {defects.length > 0 ? (
+              defects.map((defect: number, index: number) => {
+                console.log(`Обработка дефекта ${defect} (${index + 1}/${defects.length})`);
+                return handleDefectRendering(defect, index);
+              })
+            ) : (
+              <p>Нет обнаруженных дефектов для отображения.</p>
+            )}
+          </div>
+
           <div className="result-evaluation-container">
                   <div className="result-evaluation-menu">
                     <h2 className="result-evaluation-title">
@@ -364,17 +375,6 @@ const Defect: React.FC = () => {
                     )}
                   </div>
                 </div>
-
-        
-            {defects.length > 0 ? (
-              defects.map((defect: number, index: number) => {
-                console.log(`Обработка дефекта ${defect} (${index + 1}/${defects.length})`);
-                return handleDefectRendering(defect, index);
-              })
-            ) : (
-              <p>Нет обнаруженных дефектов для отображения.</p>
-            )}
-          </div>
         </div>
         <SupportChat />
       </main>

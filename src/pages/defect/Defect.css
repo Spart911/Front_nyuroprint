@@ -9,15 +9,12 @@
 .defect-title {
     /* font-size: 48px; */
     letter-spacing: -1px;
-    font-family: monospace;
     font-weight: 600;
     margin-bottom: 10px;
     margin-top: 20px;
 }
 
 .extrusion-text {
-    font-family: monospace;
-    letter-spacing: -1px;
     font-size: 20px;
     margin-bottom: 10px;
     margin-top: 5px;
@@ -62,8 +59,6 @@
 
 .icon-text-top, 
 .icon-text-bottom {
-    letter-spacing: -1px;
-    font-family: monospace;
     display: block;
 }
 

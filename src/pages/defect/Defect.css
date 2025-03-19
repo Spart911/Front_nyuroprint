@@ -100,7 +100,7 @@
 }
 
 .result-evaluation-menu {
-    max-width: 600px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,7 +109,6 @@
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-}
 
 .result-evaluation-title {
     font-size: 17px;
@@ -117,6 +116,8 @@
     margin-bottom: 20px;
     text-align: center;
 }
+
+
 
 .rating-scale {
     display: flex;

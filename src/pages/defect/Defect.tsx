@@ -283,13 +283,13 @@ const Defect: React.FC = () => {
         return null; // Если данных по дефекту нет, ничего не рендерим
       }
 
-      console.log(`Дефект ${defect}: ${defectData.title}`);
+      console.log(`Дефект ${defect}: ${defectData.title}`)
       console.log(`Количество решений: ${defectData.solutions.length}`);
 
       return (
         <div key={index}>
-          <h1 className="defect-title">
-            Обнаружен дефект: <span style={{ color: "#61875E" }}>{defectData.title}</span>
+          <h1 className="defect-title1">
+            <span style={{ color: "#61875E" }}>{defectData.title}</span>
           </h1>
           <p className="extrusion-text">{defectData.description}</p>
           {defectData.solutions.map((solution: Solution, solIndex: number) => {
@@ -326,8 +326,7 @@ const Defect: React.FC = () => {
       <main>
         <div className="container">
           <div className="defect-content">
-
-        
+          <h1 className="defect-title"><span>Обнаруженные дефекты:</span></h1>
             {defects.length > 0 ? (
               defects.map((defect: number, index: number) => {
                 console.log(`Обработка дефекта ${defect} (${index + 1}/${defects.length})`);

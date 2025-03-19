@@ -212,42 +212,69 @@ const defectRecommendations: DefectRecommendations = {
   },
 };
 
+// Добавляем типизацию для location.state
 interface LocationState {
   defects: number[];
 }
 
 const Defect: React.FC = () => {
   const location = useLocation();
-  console.log(location); 
-  const defects = (location.state as LocationState)?.defects || [];
+  // Используем приведение типов для location.state
+  const defects: number[] = (location.state as LocationState)?.defects;
 
-  // Логируем сразу при монтировании компонента
+  // Добавляем логирование при монтировании компонента
   useEffect(() => {
-    console.log("Компонент смонтирован, location.state:", location.state);
+    console.log("Компонент Defect смонтирован");
+    console.log("Состояние location:", location);
     console.log("Обнаруженные дефекты:", defects);
-  }, [location.state]);
+    
+    // Логирование доступных рекомендаций
+    console.log("Доступные рекомендации:", defectRecommendations);
+    
+    // Возвращаем функцию очистки, которая будет вызвана при размонтировании
+    return () => {
+      console.log("Компонент Defect размонтирован");
+    };
+  }, [location, defects]);
 
-  // Логируем перед рендером
-  console.log("Рендеринг компонента с дефектами:", defects);
+  // Логирование перед рендерингом
+  console.log("Рендеринг компонента Defect с", defects.length, "дефектами");
 
   const handleDefectRendering = (defect: number, index: number) => {
-    const defectData = defectRecommendations[defect];
+    try {
+      const defectData = defectRecommendations[defect];
+      if (!defectData) {
+        console.warn(`Для дефекта ${defect} нет рекомендаций`);
+        return null; // Если данных по дефекту нет, ничего не рендерим
+      }
 
-    return (
-      <div key={index} className="defect-item">
-        <h2>{defectData.title}</h2>
-        <p>{defectData.description}</p>
-        <div className="solutions">
-          {defectData.solutions.map((solution, idx) => (
-            <div key={idx} className="solution">
-              <i className={solution.icon}></i>
-              <h3>{solution.title}</h3>
-              <p>{solution.description}</p>
-            </div>
-          ))}
+      console.log(`Дефект ${defect}: ${defectData.title}`);
+      console.log(`Количество решений: ${defectData.solutions.length}`);
+
+      return (
+        <div key={index}>
+          <h1 className="defect-title">
+            Обнаружен дефект: <span style={{ color: "#61875E" }}>{defectData.title}</span>
+          </h1>
+          <p>{defectData.description}</p>
+          {defectData.solutions.map((solution: Solution, solIndex: number) => {
+            console.log(`Решение ${solIndex + 1} для дефекта ${defect}: ${solution.title}`);
+            return (
+              <div className="ic" key={solIndex}>
+                <i className={solution.icon} />
+                <div className="icon-text">
+                  <p className="icon-text-top">{solution.title}</p>
+                  <p className="icon-text-bottom">{solution.description}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    );
+      );
+    } catch (error) {
+      console.error("Ошибка при обработке дефекта:", error);
+      return <p>Ошибка при загрузке данных дефекта.</p>;
+    }
   };
 
   return (

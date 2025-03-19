@@ -149,11 +149,13 @@ const Started = () => {
     setIsAgreed(true);
     Cookies.set("userConsent", "true", { expires: 365 });
     setIsModalOpen(false);
-    if (selectedFile) {
+    
+    // Проверка, чтобы handleSubmit вызвался только один раз
+    if (selectedFile && !loading) {
       handleSubmit(selectedFile);
     }
   };
-
+  
   const handleSubmit = async (file: any) => {
     setLoading(true);
     try {

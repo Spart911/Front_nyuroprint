@@ -197,11 +197,12 @@ const Started = () => {
 
       console.log("Ответ от сервера:", response.data);
 
-      if (response.data.defect !== 0) {
-        navigate("/defect", { state: { defect: response.data.defect } });
-      } else {
+      if (response.data.defect.length === 0) {
         navigate("/not-defect");
+      } else {
+        navigate("/defect", { state: { defect: response.data.defect } });
       }
+      
     } catch (error: any) {
       if (error.response) {
         console.error("Ошибка ответа от сервера:", error.response.data);

@@ -99,7 +99,6 @@ const NotDefect = () => {
             </div>
         </div>
         </main>
-        <SupportChat />
         </>
     );
 };

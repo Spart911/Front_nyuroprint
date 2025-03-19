@@ -367,7 +367,6 @@ const Started = () => {
           )}
         </div>
       </main>
-      <SupportChat />
     </>
   );
 };

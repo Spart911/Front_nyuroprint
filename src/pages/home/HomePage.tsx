@@ -233,7 +233,6 @@ function HomePage() {
 
           </div>
         </main>
-        <SupportChat />
       </div>
       <Footer />
     </>

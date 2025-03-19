@@ -374,7 +374,6 @@ const Defect: React.FC = () => {
                   </div>
                 </div>
         </div>
-        <SupportChat />
       </main>
     </>
   );

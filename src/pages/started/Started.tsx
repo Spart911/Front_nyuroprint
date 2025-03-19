@@ -149,13 +149,11 @@ const Started = () => {
     setIsAgreed(true);
     Cookies.set("userConsent", "true", { expires: 365 });
     setIsModalOpen(false);
-    
-    // Проверка, чтобы handleSubmit вызвался только один раз
-    if (selectedFile && !loading) {
+    if (selectedFile) {
       handleSubmit(selectedFile);
     }
   };
-  
+
   const handleSubmit = async (file: any) => {
     setLoading(true);
     try {
@@ -202,7 +200,7 @@ const Started = () => {
       if (response.data.defect.length === 0) {
         navigate("/not-defect");
       } else {
-        console.log("Прыгаем в /defect:",response.data.defect );
+        console.log("Прыгаем в /defect:", response.data);
         navigate("/defect", { state: { defect: response.data.defect } });
       }
       

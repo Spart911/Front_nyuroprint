@@ -282,20 +282,12 @@ const Defect: React.FC = () => {
                 ) : null;
               })
             ) : (
-              <p>Дефекты не найдены</p>
+              <p>Нет обнаруженных дефектов для отображения.</p>
             )}
-            <a href="/started">
-              <button 
-                className="defect-button" 
-                onClick={() => console.log("Нажата кнопка возврата к анализу")}
-              >
-                Вернуться к анализу
-              </button>
-            </a>
           </div>
         </div>
+        <SupportChat />
       </main>
-      <SupportChat />
     </>
   );
 };

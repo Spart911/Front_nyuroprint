@@ -220,7 +220,7 @@ interface LocationState {
 const Defect: React.FC = () => {
   const location = useLocation();
   // Используем приведение типов для location.state
-  const defects = (location.state as LocationState)?.defects || [];
+  const defects = (location.state as LocationState)?.defect || [];
 
   // Добавляем логирование при монтировании компонента
   useEffect(() => {

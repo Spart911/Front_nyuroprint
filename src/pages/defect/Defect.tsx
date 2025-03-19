@@ -3,7 +3,7 @@ import Header from "../../widgets/header/Header";
 import "@/shared/styles/AdaptiveStyles.css";
 //@ts-ignore
 import Helmet from "react-helmet";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import SupportChat from "../supportChat/SupportChat";
 import { useEffect } from "react";
 

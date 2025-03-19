@@ -9,7 +9,7 @@ import NotDefect from "@/pages/notDefect/NotDefect";
 import Privacy from "@/pages/privacy/Privacy";
 import Started from "@/pages/started/Started";
 import HomePage from "@/pages/home/HomePage";
-import { Routes, BrowserRouter, Route } from "react-router";
+import { Routes, BrowserRouter, Route } from "react-router-dom";
 import Error from "@/pages/error/Error";
 import Defect from "@/pages/defect/Defect";
 

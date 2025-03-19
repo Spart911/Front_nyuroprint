@@ -100,14 +100,15 @@
 }
 
 .result-evaluation-menu {
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 600px;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 }
 
 .result-evaluation-title {
@@ -171,7 +172,7 @@
 
 @media (max-width: 600px) { 
     .result-evaluation-menu {
-        max-width: 350px;
+        /* max-width: 350px; */
         padding: 12px;
     }
     .result-evaluation-title {

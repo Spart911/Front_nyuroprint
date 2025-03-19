@@ -2,7 +2,6 @@ import  { useState } from 'react';
 import './NotDefect.css';
 import Header from '../../widgets/header/Header';
 import '@/shared/styles/AdaptiveStyles.css'
-import SupportChat from '../supportChat/SupportChat';
 import axios from 'axios'; // Ensure axios is installed
 
 const NotDefect = () => {

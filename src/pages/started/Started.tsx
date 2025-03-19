@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Header from "../../widgets/header/Header";
 import "./Started.css";
-import SupportChat from "../supportChat/SupportChat";
 import axios from "axios";
 //@ts-ignore
 import Cookies from "js-cookie";

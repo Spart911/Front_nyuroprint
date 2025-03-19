@@ -6,7 +6,6 @@ import "@/shared/styles/AdaptiveStyles.css";
 //@ts-ignore
 import Helmet from "react-helmet";
 import { useLocation } from "react-router";
-import SupportChat from "../supportChat/SupportChat";
 import { useEffect } from "react";
 
 // Определение интерфейсов для типизации

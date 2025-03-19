@@ -200,6 +200,7 @@ const Started = () => {
       if (response.data.defect.length === 0) {
         navigate("/not-defect");
       } else {
+        console.log("Прыгаем в /defect:",response.data.defect );
         navigate("/defect", { state: { defect: response.data.defect } });
       }
       

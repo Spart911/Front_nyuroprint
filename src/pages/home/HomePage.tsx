@@ -2,7 +2,7 @@ import "./HomePage.css";
 import "@/shared/styles/AdaptiveStyles.css";
 import Header from "@/widgets/header/Header";
 import Footer from "@/widgets/footer/Footer";
-import backgroundPhoto from "@/shared/img/9f790837a3c73a1f623cdf71751b00bb.png";
+import backgroundPhoto from "@/shared/img/start_image.webp";
 import logo_FSI from "@/shared/img/logo_FSI.png";
 import logo1 from "@/shared/img/Component 5.png";
 import logo2 from "@/shared/img/5e356d6acc3937c43a6f01722f09743d 1.png";

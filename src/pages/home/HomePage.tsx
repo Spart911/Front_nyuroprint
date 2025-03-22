@@ -12,6 +12,7 @@ import img1 from "@/shared/img/3.jpg";
 import img2 from"@/shared/img/1.jpeg";
 import { useState } from "react";
 //@ts-ignore
+import { Analytics } from "@vercel/analytics/react";
 import { Helmet } from "react-helmet";
 
 function HomePage() {
@@ -235,6 +236,7 @@ function HomePage() {
         </main>
       </div>
       <Footer />
+      <Analytics />
     </>
   );
 }

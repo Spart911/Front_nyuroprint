@@ -13,6 +13,7 @@ import { Routes, BrowserRouter, Route } from "react-router";
 import Error from "@/pages/error/Error";
 import Defect from "@/pages/defect/Defect";
 
+
 export const App = () => {
   return (
     <BrowserRouter>
